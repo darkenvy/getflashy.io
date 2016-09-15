@@ -1,0 +1,30 @@
+{
+  "name": "react-tutorial",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Code from the React tutorial.",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.4.3",
+    "express": "^4.4.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reactjs/react-tutorial.git"
+  },
+  "keywords": [
+  ],
+  "author": "Robert Futrell",
+  "bugs": {
+  },
+  "homepage": "",
+  "engines" : {
+    "node" : "0.12.x"
+  }
+}
