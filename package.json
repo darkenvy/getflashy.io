@@ -1,30 +1,30 @@
 {
-  "name": "react-tutorial",
+  "name": "getflashy.io",
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
-  "description": "Code from the React tutorial.",
-  "main": "server.js",
+  "description": "Source code for getflashy.io",
   "dependencies": {
-    "body-parser": "^1.4.3",
-    "express": "^4.4.5"
+    "async": "^1.5.2",
+    "compression": "^1.6.2",
+    "express": "^4.13.4"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/reactjs/react-tutorial.git"
-  },
-  "keywords": [
-  ],
-  "author": "Robert Futrell",
-  "bugs": {
-  },
-  "homepage": "",
-  "engines" : {
-    "node" : "0.12.x"
+  "devDependencies": {
+    "dateformat": "^1.0.12",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-concat-css": "^2.3.0",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-jshint": "^2.0.1",
+    "gulp-less": "^3.1.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-replace": "^0.5.4",
+    "gulp-rev": "^7.0.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-usemin": "^0.3.23",
+    "jshint": "^2.9.2",
+    "jshint-stylish": "^2.2.0",
+    "run-sequence": "^1.2.1"
   }
 }
