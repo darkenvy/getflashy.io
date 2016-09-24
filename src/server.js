@@ -18,12 +18,14 @@ app.get('/api/decks/:deckId', function(req, res) {
 
     res.type('application/json');
 
-    res.json(decks[req.params.deckId]);
-    // if (!airportData) {
-    //     res.statusCode = 404;
-    //     res.json({ error: 'Airport not found: ' + airportCode });
-    //     return;
-    // }
+    var deck = decks[req.params.deckId];
+    if (deck) {
+        res.json(deck);
+    }
+    else {
+        res.statusCode = 404;
+        res.json({ error: 'Deck not found: ' + req.params.deckId });
+    }
 });
 
 app.use(express.static(__dirname));

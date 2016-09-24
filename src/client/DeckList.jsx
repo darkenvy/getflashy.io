@@ -32,7 +32,7 @@ window.DeckList = React.createClass({
                 this.setState({ deckId: data, response: JSON.stringify(data) });
             }.bind(this),
             error: function(xhr, status, err) {
-                this.setState({ deckId: {}, response: 'Oops!' });
+                this.setState({ deckId: '', response: 'Oops!' });
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
@@ -53,11 +53,11 @@ window.DeckList = React.createClass({
                 <DeckFilter label="Filter decks:" helpText={this.state.deckId} onChange={this.onDeckChange}/>
 
                 <ReactBootstrap.Button bsStyle="primary" disabled={!this.state.deckId} onClick={this.buttonClicked}>Check!</ReactBootstrap.Button>
-                <div class="result">{this.state.response}</div>
+                <div className="result">{this.state.response}</div>
 
                 {
                     Object.keys(self.state.decks).map(function(key) {
-                        return <div key={key}>Key: {key}, Value: {self.state.decks[key].name}</div>;
+                        return <DeckButton key={key} deck={self.state.decks[key]} />
                     })
                 }
             </div>

@@ -4,6 +4,9 @@
   "private": true,
   "license": "MIT",
   "description": "Source code for getflashy.io",
+  "scripts": {
+    "start": "node src/server.js"
+  },
   "dependencies": {
     "async": "^1.5.2",
     "compression": "^1.6.2",
