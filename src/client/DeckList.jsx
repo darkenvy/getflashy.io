@@ -1,11 +1,11 @@
 window.DeckList = React.createClass({
 
     getInitialState: function() {
-        return { deckId: '', decks: {}, response: '(none)' };
+        return { deckId: '', decks: {}, deckFilter: '' };
     },
 
     componentWillMount: function() {
-        this.fetchDeckInfo = _.debounce(this.fetchDeckInfo, 1000);
+        this.fetchDeckInfo = _.debounce(this.fetchDeckInfo, 500);
     },
 
     componentDidMount: function() {
@@ -38,26 +38,30 @@ window.DeckList = React.createClass({
         });
     },
 
-    onDeckChange: function(deckId) {
-        console.log('deckId changed to: ' + deckId);
-        this.setState({ deckId: deckId });
-        this.fetchDeckInfo(deckId);
+    onDeckFilterChange: function(filter) {
+        this.setState({ deckFilter: filter });
+        //this.fetchDeckInfo(deckId);
     },
 
     render: function() {
 
         var self = this;
+        var filteredDecks = [];
+        Object.keys(this.state.decks).forEach(function(key) {
+            if (key.startsWith(self.state.deckFilter)) {
+                filteredDecks.push(self.state.decks[key]);
+            }
+        });
 
         return (
             <div>
-                <DeckFilter label="Filter decks:" helpText={this.state.deckId} onChange={this.onDeckChange}/>
+                <DeckFilter label="Filter decks:" helpText={this.state.deckId} onChange={this.onDeckFilterChange}/>
 
-                <ReactBootstrap.Button bsStyle="primary" disabled={!this.state.deckId} onClick={this.buttonClicked}>Check!</ReactBootstrap.Button>
                 <div className="result">{this.state.response}</div>
 
                 {
-                    Object.keys(self.state.decks).map(function(key) {
-                        return <DeckButton key={key} deck={self.state.decks[key]} />
+                    Object.keys(filteredDecks).map(function(key) {
+                        return <DeckButton key={key} deck={filteredDecks[key]} onClick={self.props.startDeck}/>
                     })
                 }
             </div>

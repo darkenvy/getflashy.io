@@ -6,10 +6,17 @@ window.DeckButton = React.createClass({
 
     render: function() {
 
+        var deck = this.props.deck;
+        var date = new Date().toString();
+
         return (
-            <div className="deck-button">
+            <div className="deck-button" onClick={this.props.onClick}>
                 <div className="deck-details">
-                    Deck: {this.props.deck.name}
+                    <div>
+                        <div>Deck: {deck.name}</div>
+                        <div>{deck.cards.length} cards</div>
+                        <div>Uploaded {date}</div>
+                    </div>
                 </div>
             </div>
         );
