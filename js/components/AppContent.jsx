@@ -1,14 +1,27 @@
-window.AppContent = React.createClass({
+import React from 'react';
+import AppNavbar from './Navbar';
+import DeckList from './DeckList';
 
-    getInitialState: function() {
-        return { state: 'select-deck', deck: '' };
-    },
+class AppComponent extends React.Component {
 
-    startDeck: function(deckName) {
+    constructor(props) {
+
+        super(props);
+
+        this.state = {
+            state: 'select-deck',
+            deck: ''
+        };
+
+        // Manually bind this method to the component instance so "this" is what we expect
+        this.startDeck = this.startDeck.bind(this);
+    }
+
+    startDeck(deckName) {
         this.setState({ state: 'view-deck', deck: deckName });
-    },
+    }
 
-    render: function () {
+    render() {
 
         var self = this;
 
@@ -30,8 +43,6 @@ window.AppContent = React.createClass({
             </div>
         );
     }
-});
+}
 
-ReactDOM.render(React.createElement(window.AppContent),
-    document.getElementById('app-content')
-);
+export default AppComponent;

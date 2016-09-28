@@ -1,10 +1,13 @@
-window.DeckButton = React.createClass({
+import React from 'react';
 
-    getInitialState: function() {
-        return { };
-    },
+export class DeckButton extends React.Component {
 
-    render: function() {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
+    render() {
 
         var deck = this.props.deck;
         var date = new Date().toString();
@@ -21,4 +24,7 @@ window.DeckButton = React.createClass({
             </div>
         );
     }
-});
+}
+
+export default DeckButton;
+

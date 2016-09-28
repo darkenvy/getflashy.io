@@ -1,14 +1,21 @@
-window.DeckList = React.createClass({
+import React from 'react';
+import DeckButton from './DeckButton';
+import DeckFilter from './DeckFilter';
+import $ from 'jquery';
+import _ from 'lodash';
 
-    getInitialState: function() {
-        return { deckId: '', decks: {}, deckFilter: '' };
-    },
+class DeckList extends React.Component {
 
-    componentWillMount: function() {
+    constructor(props) {
+        super(props);
+        this.state = { deckId: '', decks: {}, deckFilter: '' };
+    }
+
+    componentWillMount() {
         this.fetchDeckInfo = _.debounce(this.fetchDeckInfo, 500);
-    },
+    }
 
-    componentDidMount: function() {
+    componentDidMount() {
         $.ajax({
             url: '/api/decks',
             dataType: 'json',
@@ -20,9 +27,9 @@ window.DeckList = React.createClass({
                 console.error('#GET Error', status, err.toString());
             }.bind(this)
         });
-    },
+    }
 
-    fetchDeckInfo: function(deckId) {
+    fetchDeckInfo(deckId) {
         $.ajax({
             url: 'api/decks/' + deckId,
             dataType: 'json',
@@ -36,14 +43,14 @@ window.DeckList = React.createClass({
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
-    },
+    }
 
-    onDeckFilterChange: function(filter) {
+    onDeckFilterChange(filter) {
         this.setState({ deckFilter: filter });
         //this.fetchDeckInfo(deckId);
-    },
+    }
 
-    render: function() {
+    render() {
 
         var self = this;
         var filteredDecks = [];
@@ -67,4 +74,6 @@ window.DeckList = React.createClass({
             </div>
         );
     }
-});
+}
+
+export default DeckList;

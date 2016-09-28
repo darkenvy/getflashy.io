@@ -1,5 +1,9 @@
-window.AppNavbar = React.createClass({
-    render: function() {
+import React from 'react';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+
+class AppNavbar extends React.Component {
+
+    render() {
         return (
             <Navbar>
                 <Navbar.Header>
@@ -21,4 +25,6 @@ window.AppNavbar = React.createClass({
             </Navbar>
         );
     }
-});
+}
+
+export default AppNavbar;
