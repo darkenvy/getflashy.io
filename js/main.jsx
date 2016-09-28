@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Button } from 'react-bootstrap';
 import AppContent from './components/AppContent';
 
-//require('font-awesome/css/font-awesome.css');
 import 'font-awesome/css/font-awesome.css';
 import 'app.less';
 
