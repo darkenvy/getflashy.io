@@ -9,6 +9,9 @@ class DeckList extends React.Component {
     constructor(props) {
         super(props);
         this.state = { deckId: '', decks: {}, deckFilter: '' };
+
+        // Manually bind this method to the component instance so "this" is what we expect
+        this.onDeckFilterChange = this.onDeckFilterChange.bind(this);
     }
 
     componentWillMount() {

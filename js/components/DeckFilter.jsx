@@ -5,8 +5,10 @@ class DeckFilter extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.state = { deckId: '' };
+
+        // Manually bind this method to the component instance so "this" is what we expect
+        this.handleDeckIdChange = this.handleDeckIdChange.bind(this);
     }
 
     handleDeckIdChange(e) {
