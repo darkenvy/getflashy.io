@@ -1,4 +1,5 @@
 var express = require('express');
+var livereload = require('express-livereload');
 var app = express();
 
 var compression = require('compression');
@@ -14,18 +15,37 @@ const files = fs.readdirSync(deckDir);
 files.forEach((file, index) => {
     const id = file.substring(0, file.lastIndexOf('.'));
     decks[id] = require(path.join(deckDir, id));
+    decks[id].id = id;
+    decks[id].modified = fs.statSync(path.join(deckDir, file)).mtime;
 });
 
 console.log('Decks:');
 console.log(JSON.stringify(decks));
 console.log();
 
-app.get('/api/decks', function(req, res) {
+const createDeckMetadata = (decks) => {
+
+    const metadata = {};
+
+    for (var deckId in decks) {
+        var deck = decks[deckId];
+        metadata[deckId] = {
+            name: deck.name,
+            id: deck.id,
+            modified: deck.modified,
+            size: deck.cards.length
+        };
+    }
+
+    return metadata;
+};
+
+app.get('/api/decks', (req, res) => {
     res.type('application/json');
-    res.json(decks);
+    res.json(createDeckMetadata(decks));
 });
 
-app.get('/api/decks/:deckId', function(req, res) {
+app.get('/api/decks/:deckId', (req, res) => {
 
     res.type('application/json');
 
@@ -39,11 +59,12 @@ app.get('/api/decks/:deckId', function(req, res) {
     }
 });
 
-app.use(express.static(__dirname + '/build'));
+app.use(express.static(path.join(__dirname, 'build')));
 
 // Single-page app; always route to index.html for non-static content URLs
 app.get('/*', (req, res) => {
-    res.sendFile(__dirname + '/build/index.html');
+    res.sendFile(path.join(__dirname, 'build/index.html'));
 });
 
 app.listen(process.env.PORT || 8080);
+livereload(app);

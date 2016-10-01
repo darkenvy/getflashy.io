@@ -8,7 +8,7 @@ class AppNavbar extends React.Component {
             <Navbar>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="#"><i className="fa fa-frown-o" aria-hidden="true"></i><i className="fa fa-clock-o" aria-hidden="true"></i> Flashy</a>
+                        <a href="/"><i className="fa fa-bolt" aria-hidden="true"></i> Flashy</a>
                     </Navbar.Brand>
                 </Navbar.Header>
                 <Nav>

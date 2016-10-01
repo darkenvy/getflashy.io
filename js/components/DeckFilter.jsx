@@ -5,17 +5,17 @@ class DeckFilter extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { deckId: '' };
+        this.state = { filter: '' };
 
         // Manually bind this method to the component instance so "this" is what we expect
-        this.handleDeckIdChange = this.handleDeckIdChange.bind(this);
+        this.handleFilterChange = this.handleFilterChange.bind(this);
     }
 
-    handleDeckIdChange(e) {
-        var newDeckId = e.target.value;
-        this.setState({ deckId: newDeckId });
+    handleFilterChange(e) {
+        var filter = e.target.value;
+        this.setState({ filter: filter });
         if (this.props.onChange) {
-            this.props.onChange(newDeckId);
+            this.props.onChange(filter);
         }
     }
 
@@ -30,10 +30,10 @@ class DeckFilter extends React.Component {
                     <FormControl
                         type="text"
                         placeholder="Example: State Capitals"
-                        onChange={this.handleDeckIdChange}
+                        onChange={this.handleFilterChange}
                     />
                     <FormControl.Feedback />
-                    <HelpBlock>{this.props.helpText || "(Unknown deck)"}</HelpBlock>
+                    <HelpBlock>{this.props.helpText || ''}</HelpBlock>
                 </FormGroup>
 
             </div>

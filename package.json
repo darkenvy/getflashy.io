@@ -35,6 +35,7 @@
     "babel-preset-react": "^6.11.1",
     "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.25.0",
+    "express-livereload": "0.0.24",
     "file-loader": "^0.9.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",

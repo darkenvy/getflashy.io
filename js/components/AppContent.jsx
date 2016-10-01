@@ -37,7 +37,7 @@ class AppComponent extends React.Component {
                             if (!this.props.params.deck) {
                                 return (<DeckList onDeckClick={this.startDeck}/>)
                             }
-                            return (<Deck deck={this.state.deck}/>)
+                            return (<Deck deckId={this.props.params.deck}/>)
                         })()
                     }
                 </div>
