@@ -1,9 +1,11 @@
+@card-border: darkgrey;
+
 .deck-button {
 
   vertical-align: middle;
   text-align: center;
   background: #f0f0f0;
-  border: 1px solid darkgrey;
+  border: 1px solid @card-border;
   border-radius: 3px;
 
   width: 80%;
@@ -14,5 +16,26 @@
 
   .deck-details {
     margin: 1rem 0;
+  }
+}
+
+.deck {
+
+  .card {
+
+    .card-top { // Just a decoration at the top of a card
+      width: 100%;
+      height: 3rem;
+      background: blue;
+      border-bottom: 1px solid @card-border;
+    }
+
+    width: 60%;
+    height: 300px;
+    border: 1px solid @card-border;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    background: white;
+    box-shadow: 5px 5px 5px #f0f0f0;
   }
 }

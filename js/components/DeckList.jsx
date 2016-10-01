@@ -23,6 +23,9 @@ class DeckList extends React.Component {
             url: '/api/decks',
             dataType: 'json',
             success: function(data) {
+                for (var deckId in data) {
+                    data[deckId].id = deckId;
+                }
                 console.log('data === ' + JSON.stringify(data));
                 this.setState({ decks: data });
             }.bind(this),
@@ -67,11 +70,9 @@ class DeckList extends React.Component {
             <div>
                 <DeckFilter label="Filter decks:" helpText={this.state.deckId} onChange={this.onDeckFilterChange}/>
 
-                <div className="result">{this.state.response}</div>
-
                 {
                     Object.keys(filteredDecks).map(function(key) {
-                        return <DeckButton key={key} deck={filteredDecks[key]} onClick={self.props.startDeck}/>
+                        return <DeckButton key={key} deck={filteredDecks[key]} onClick={self.props.onDeckClick}/>
                     })
                 }
             </div>

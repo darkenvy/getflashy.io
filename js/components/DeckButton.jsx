@@ -13,7 +13,7 @@ export class DeckButton extends React.Component {
         var date = new Date().toString();
 
         return (
-            <div className="deck-button" onClick={this.props.onClick}>
+            <div className="deck-button" onClick={ () => this.props.onClick(deck) }>
                 <div className="deck-details">
                     <div>
                         <div>Deck: {deck.name}</div>

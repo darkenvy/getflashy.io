@@ -5,9 +5,20 @@ var compression = require('compression');
 app.use(compression());
 
 var fs = require('fs');
+var path = require('path');
 var async = require('async');
 
-var decks = require('./decks').decks;
+const decks = {};
+const deckDir = path.join(__dirname, 'decks');
+const files = fs.readdirSync(deckDir);
+files.forEach((file, index) => {
+    const id = file.substring(0, file.lastIndexOf('.'));
+    decks[id] = require(path.join(deckDir, id));
+});
+
+console.log('Decks:');
+console.log(JSON.stringify(decks));
+console.log();
 
 app.get('/api/decks', function(req, res) {
     res.type('application/json');
@@ -29,4 +40,10 @@ app.get('/api/decks/:deckId', function(req, res) {
 });
 
 app.use(express.static(__dirname + '/build'));
+
+// Single-page app; always route to index.html for non-static content URLs
+app.get('/*', (req, res) => {
+    res.sendFile(__dirname + '/build/index.html');
+});
+
 app.listen(process.env.PORT || 8080);

@@ -1,6 +1,8 @@
 import React from 'react';
 import AppNavbar from './Navbar';
+import Deck from './Deck';
 import DeckList from './DeckList';
+import { browserHistory } from 'react-router';
 
 class AppComponent extends React.Component {
 
@@ -17,13 +19,12 @@ class AppComponent extends React.Component {
         this.startDeck = this.startDeck.bind(this);
     }
 
-    startDeck(deckName) {
-        this.setState({ state: 'view-deck', deck: deckName });
+    startDeck(deck) {
+        browserHistory.push('/' + deck.id); // TODO: This is probably very, very bad, but how do we programmatically navigate?
+        this.setState({ state: 'view-deck', deck: deck });
     }
 
     render() {
-
-        var self = this;
 
         return (
             <div>
@@ -32,11 +33,11 @@ class AppComponent extends React.Component {
 
                 <div className="container">
                     {
-                        (function () {
-                            if (self.state.state === 'select-deck') {
-                                return (<DeckList startDeck={self.startDeck}/>)
+                        (() => {
+                            if (!this.props.params.deck) {
+                                return (<DeckList onDeckClick={this.startDeck}/>)
                             }
-                            return (<div>Sorry charlie</div>)
+                            return (<Deck deck={this.state.deck}/>)
                         })()
                     }
                 </div>
