@@ -34,12 +34,16 @@ class Deck extends React.Component {
 
         return (
             <div className="deck">
+                <div className="left-nav"></div>
+                <div className="deck-card-section">
                 {
                     this.props.deck.cards.map((card) => {
                         console.log(card);
                         return <Card key={card.front} card={card}/>
                     })
                 }
+                </div>
+                <div className="right-nav"></div>
             </div>
         );
     }

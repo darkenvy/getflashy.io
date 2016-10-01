@@ -31,7 +31,7 @@ class AppComponent extends React.Component {
 
                 <AppNavbar/>
 
-                <div className="container">
+                <div className="container-fluid main-content">
                     {
                         (() => {
                             if (!this.props.params.deck) {

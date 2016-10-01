@@ -67,7 +67,7 @@ class DeckList extends React.Component {
         });
 
         return (
-            <div>
+            <div className="container">
                 <DeckFilter label="Filter decks:" helpText={this.state.deckId} onChange={this.onDeckFilterChange}/>
 
                 {
