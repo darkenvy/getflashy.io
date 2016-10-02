@@ -16,9 +16,20 @@ class Card extends React.Component {
 
     render() {
 
-        var text = this.props.flipped ? this.props.card.back : this.props.card.front;
+        var card = this.props.card;
+        var text = this.props.flipped ? card.back : card.front;
 
-        var style = {
+        var context1 = this.props.flipped ? card.backContext1 : card.frontContext1;
+        var context1Style = {
+            display: context1 ? 'block' : 'none'
+        };
+
+        var context2 = this.props.flipped ? card.backContext2 : card.frontContext2;
+        var context2Style = {
+            display: context2 ? 'block' : 'none'
+        };
+
+        var frontHintStyle = {
             display: this.props.flipped ? 'block' : 'none'
         };
 
@@ -28,12 +39,20 @@ class Card extends React.Component {
                 <div className="card-top"></div>
 
                 <div className="card-content">
-                    <div className="main-card-content">
-                        {text}
+                    <div className="card-content-wrapper">
+                        <div className="main-card-content">
+                            {text}
+                        </div>
+                        <div className="context-1" style={context1Style}>
+                            {context1}
+                        </div>
+                        <div className="context-2" style={context2Style}>
+                            {context2}
+                        </div>
                     </div>
                 </div>
 
-                <div className="frontHint" style={style}>
+                <div className="frontHint" style={frontHintStyle}>
                     {this.props.card.front}
                 </div>
             </div>

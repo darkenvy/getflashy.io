@@ -1,4 +1,5 @@
 @card-border: darkgrey;
+@less-important-text-color: gray;
 
 html, body {
   height: 100%;
@@ -71,25 +72,38 @@ html, body {
 
     .card-top { // Just a decoration at the top of a card
       width: 100%;
-      height: 3rem;
+      height: 4rem;
       background: blue;
       border-bottom: 1px solid @card-border;
     }
 
     .card-content {
-      font-size: large;
-      font-weight: bold;
-      height: ~"calc(100% - 3rem - 2rem)"; // .card-top and .frontHint
+      height: ~"calc(100% - 4rem - 2rem)"; // .card-top and .frontHint
       display: flex;
       justify-content: center;
 
-      .main-card-content {
+      .card-content-wrapper {
+
         align-self: center;
+        text-align: center;
+
+        .main-card-content {
+          font-size: larger;
+          font-weight: bold;
+        }
+        .context-1 {
+          font-style: italic;
+          margin-top: 1rem;
+        }
+        .context-2 {
+          margin-top: 1rem;
+          color: @less-important-text-color;
+        }
       }
     }
 
     .frontHint {
-      color: gray;
+      color: @less-important-text-color;
       font-style: italic;
       height: 2rem; // Ugh, getting around bootstrap px-vs-rem issue here.  Should be fixed in Bootstrap 4
       text-align: right;
