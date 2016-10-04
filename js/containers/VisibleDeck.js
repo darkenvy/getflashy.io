@@ -3,7 +3,7 @@ import Deck from '../components/Deck';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        deckId: ownProps.deckId // Don't use redux state for bookmarking purposes
+        deckId: ownProps.params.deckId // Don't use redux state for bookmarking purposes
     };
 };
 

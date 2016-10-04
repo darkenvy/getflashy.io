@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
-import VisibleApp from './containers/VisibleApp';
-import { Router, Route, browserHistory } from 'react-router';
+import App from './components/App';
+import VisibleDeck from './containers/VisibleDeck';
+import VisibleDeckList from './containers/VisibleDeckList';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import thunkMiddleware from 'redux-thunk'; // Allow action creators to return functions for async operations
 import createLogger from 'redux-logger'; // Log actions
 
@@ -22,7 +24,10 @@ const store = createStore(rootReducer,
 ReactDOM.render(
     <Provider store={store}>
         <Router history={browserHistory}>
-            <Route path="/(:deck)" component={VisibleApp} />
+            <Route path="/" component={App}>
+                <IndexRoute component={VisibleDeckList} />
+                <Route path="/:deckId" component={VisibleDeck} />
+            </Route>
         </Router>
     </Provider>,
     document.getElementById('app-content')

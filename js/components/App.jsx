@@ -33,14 +33,7 @@ class App extends React.Component {
                 <AppNavbar/>
 
                 <div className="container-fluid main-content">
-                    {
-                        (() => {
-                            if (!deckId) {
-                                return (<VisibleDeckList/>)
-                            }
-                            return (<VisibleDeck deckId={deckId}/>)
-                        })()
-                    }
+                    {this.props.children}
                 </div>
             </div>
         );
