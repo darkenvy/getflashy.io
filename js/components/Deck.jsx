@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import Card from './Card';
 import DeckStatus from './DeckStatus';
+import { Link } from 'react-router';
 
 class Deck extends React.Component {
 
@@ -56,7 +57,7 @@ class Deck extends React.Component {
 
     fetchDeckInfo(deckId) {
         $.ajax({
-            url: 'api/decks/' + deckId,
+            url: '/api/decks/' + deckId,
             dataType: 'json',
             cache: false,
             success: function(data) {
@@ -64,10 +65,29 @@ class Deck extends React.Component {
                 this.setState({ deck: data });
             }.bind(this),
             error: function(xhr, status, err) {
-                this.setState({ deckId: '', response: 'Oops!' });
-                console.error(this.props.url, status, err.toString());
+                this.setState({ deckId: '', curCard: -1 });
+                console.error(deckId, status, err.toString());
             }.bind(this)
         });
+    }
+
+    noSuchDeck() {
+        return (
+            <div className="container">
+                No such deck!
+                <p>
+                    <Link to="/">Back to deck list</Link>
+                </p>
+            </div>
+        );
+    }
+
+    loadingScreen() {
+        return (
+            <div className="container">
+                Loading...
+            </div>
+        );
     }
 
     render() {
@@ -105,7 +125,11 @@ class Deck extends React.Component {
                             )
                         }
 
-                        return <div>Loading...</div>
+                        else if (this.state.curCard === -1) {
+                            return this.noSuchDeck();
+                        }
+
+                        return this.loadingScreen();
                     })()
                 }
             </div>

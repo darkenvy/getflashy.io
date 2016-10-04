@@ -4,7 +4,9 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
 import App from './components/App';
+import App404 from './components/App404';
 import VisibleDeck from './containers/VisibleDeck';
+import VisibleDeckConfig from './containers/VisibleDeckConfig';
 import VisibleDeckList from './containers/VisibleDeckList';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import thunkMiddleware from 'redux-thunk'; // Allow action creators to return functions for async operations
@@ -26,7 +28,9 @@ ReactDOM.render(
         <Router history={browserHistory}>
             <Route path="/" component={App}>
                 <IndexRoute component={VisibleDeckList} />
-                <Route path="/:deckId" component={VisibleDeck} />
+                <Route path="/config/:deckId" component={VisibleDeckConfig} />
+                <Route path="/decks/:deckId"  component={VisibleDeck} />
+                <Route path='*' component={App404} />
             </Route>
         </Router>
     </Provider>,

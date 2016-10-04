@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import AppNavbar from './Navbar';
-import VisibleDeckList from '../containers/VisibleDeckList';
-import VisibleDeck from '../containers/VisibleDeck';
 import { fetchDeckMetadata } from '../actions';
 import { browserHistory } from 'react-router';
 

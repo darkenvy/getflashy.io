@@ -43,7 +43,7 @@ export const fetchDeckMetadata = () => {
 };
 
 export const startDeck = (deckId) => {
-    browserHistory.push('/' + deckId); // TODO: This is probably very, very bad, but how do we programmatically navigate?
+    browserHistory.push('/decks/' + deckId); // TODO: This is probably very, very bad, but how do we programmatically navigate?
     return {
         type: 'START_DECK',
         deckId: deckId
