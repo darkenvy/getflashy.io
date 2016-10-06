@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { startDeck } from '../actions';
+import { configureDeck } from '../actions';
 import DeckList from '../components/DeckList';
 
 const mapStateToProps = (state) => {
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onDeckClick: (deck) => {
-            dispatch(startDeck(deck.id));
+            dispatch(configureDeck(deck.id));
         }
     };
 };

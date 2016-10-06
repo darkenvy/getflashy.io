@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import Deck from '../components/DeckConfig';
+import { startDeck } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -9,6 +10,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        onDeckConfigure: (deckId) => {
+            dispatch(startDeck(deckId));
+        }
     };
 };
 

@@ -13,11 +13,9 @@ class DeckConfig extends React.Component {
         this.setShowSide = this.setShowSide.bind(this);
     }
 
-    componentDidMount() {
-    }
-
     startDeck() {
-        console.log('Validate, then go to /decks/ + this.props.deckId (probably in an action?)');
+        // TODO: Validation of inputsw
+        this.props.onDeckConfigure(this.props.deckId);
     }
 
     setShowSide(side) {

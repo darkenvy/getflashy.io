@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 const currentDeck/*Reducer*/ = (state = null, action) => {
     switch (action.type) {
+        case 'CONFIGURE_DECK':
         case 'START_DECK':
             return action.deckId;
         default:
