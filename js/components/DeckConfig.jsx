@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Link } from 'react-router';
-import { FormGroup, ButtonGroup, Button, ControlLabel, HelpBlock } from 'react-bootstrap';
+import { FormGroup, ButtonGroup, Button, ControlLabel, HelpBlock, Panel } from 'react-bootstrap';
 
 class DeckConfig extends React.Component {
 
@@ -27,24 +27,33 @@ class DeckConfig extends React.Component {
         return (
             <div className="container">
 
-                <div className="app-form">
+                <div className="config-header">
+                    <h2>Get Ready!</h2>
+                    <p>
+                        Let us know how you'd like to go through this deck of flashcards.
+                    </p>
+                </div>
+
+                <Panel className="app-form">
 
                     <FormGroup controlId="formBasicText">
-                        <ControlLabel>Show me</ControlLabel>
-                        <ButtonGroup>
-                            <Button onClick={() => { this.setShowSide('front'); }}
-                                bsStyle={this.state.showSide === 'front' ? 'primary' : 'default'}>Front side</Button>
-                            <Button onClick={() => { this.setShowSide('back'); }}
-                                bsStyle={this.state.showSide !== 'front' ? 'primary' : 'default'}>Back side</Button>
-                        </ButtonGroup>
-                        <HelpBlock>("Front side" is typical)</HelpBlock>
+                        <ControlLabel className="config-label">Show me:</ControlLabel>
+                        <div className="nonstandard-form-control">
+                            <ButtonGroup>
+                                <Button onClick={() => { this.setShowSide('front'); }}
+                                    bsStyle={this.state.showSide === 'front' ? 'primary' : 'default'}>Front side</Button>
+                                <Button onClick={() => { this.setShowSide('back'); }}
+                                    bsStyle={this.state.showSide !== 'front' ? 'primary' : 'default'}>Back side</Button>
+                            </ButtonGroup>
+                            <HelpBlock className="inline-help-block">("Front side" is typical)</HelpBlock>
+                        </div>
                     </FormGroup>
 
-                </div>
 
-                <div className="config-submit-button-area">
-                    <Button onClick={this.startDeck}>Start flipping!</Button>
-                </div>
+                    <div className="config-submit-button-area">
+                        <Button onClick={this.startDeck}>Start flipping!</Button>
+                    </div>
+                </Panel>
             </div>
         );
     }
