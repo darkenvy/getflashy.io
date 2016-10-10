@@ -7,10 +7,13 @@ var dir_less = path.resolve(__dirname, 'less');
 var dir_build = path.resolve(__dirname, 'build');
 
 module.exports = {
-    entry: path.resolve(dir_js, 'main.jsx'),
+    entry: [
+        path.resolve(dir_js, 'main.jsx')
+    ],
     output: {
         path: dir_build,
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/'
     },
     resolve: {
         extensions: ["", ".jsx", ".js"],
