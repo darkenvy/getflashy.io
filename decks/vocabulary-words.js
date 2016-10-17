@@ -125,6 +125,42 @@ module.exports = {
         },
         {
             "front": {
+                "text": "Austere",
+                "context1": "adj",
+                "context2": "(aw _steer_)"
+            },
+            "back": {
+                "text": "severe or stern in appearance; undecorated",
+                "context1": "The lack of decoration makes Zen templates seem _austere_ to the untrained eye.",
+                "context2": "Synonyms: bleak; dour; grim; hard; harsh; severe"
+            }
+        },
+        {
+            "front": {
+                "text": "Axiom",
+                "context1": "noun",
+                "context2": "(_aak_ see uhm)"
+            },
+            "back": {
+                "text": "premise; postulate; self-evident truth",
+                "context1": "Halle lived her life based on the _axioms_ her grandmother had passed on to her.",
+                "context2": "Synonyms: adage; aphorism; apothegm; maxim; rule"
+            }
+        },
+        {
+            "front": {
+                "text": "Bolster",
+                "context1": "verb",
+                "context2": "(_bohl_ stuhr)"
+            },
+            "back": {
+                "text": "to support; to prop up",
+                "context1": "The presence of giant footprints _bolstered_ the argument that Bigfoot was in the area.",
+                "context2": "Synonyms: brace; buttress; crutch; prop; stay; support; sustain; underpin; uphold"
+            }
+        },
+        {
+            "front": {
                 "text": "Bombastic",
                 "context1": "adj",
                 "context2": "(bahm _baast_ ihk)"
@@ -133,6 +169,18 @@ module.exports = {
                 "text": "pompous in speech and manner",
                 "context1": "Mussolini's speeches were mostly _bombastic_; his boasting and outrageous claims had no basis in fact.",
                 "context2": "Synonyms: bloated; declamatory; fustain; grandiloquent; grandiose; high-flown; magniloquent; orotund; pretentious; rhetorical; self-important"
+            }
+        },
+        {
+            "front": {
+                "text": "Cacophony",
+                "context1": "noun",
+                "context2": "(kuh _kah_ fuh nee)"
+            },
+            "back": {
+                "text": "a harsh, jarring noise",
+                "context1": "The junior high orchestra created an almost unbearable _cacophony_ as they tried to tune their instruments.",
+                "context2": "Synonyms: chaos; clamor; din; discord; disharmony; noise"
             }
         },
         {
@@ -185,6 +233,18 @@ module.exports = {
         },
         {
             "front": {
+                "text": "Coalesce",
+                "context1": "verb",
+                "context2": "(koh uh _lehs_)"
+            },
+            "back": {
+                "text": "to grow together to form as ingle whole",
+                "context1": "The sun and planets eventually _coalesced_ out of a vast cloud of gas and dust.",
+                "context2": "Synonyms: amalgamate; blend; condense; consolidate; fuse; unite"
+            }
+        },
+        {
+            "front": {
                 "text": "Contumacious",
                 "context1": "adj",
                 "context2": "(kahn tuh _may_ shus)"
@@ -209,6 +269,18 @@ module.exports = {
         },
         {
             "front": {
+                "text": "Coterie",
+                "context1": "noun",
+                "context2": "(_koh_ tuh ree) (koh tuh _ree_)"
+            },
+            "back": {
+                "text": "an intimate group of persons with a similar purpose",
+                "context1": "Angel invited a _coterie_ of fellow stamp enthusiasts to a stamp-trading party.",
+                "context2": "Synonyms: clique; set"
+            }
+        },
+        {
+            "front": {
                 "text": "Cupidity",
                 "context1": "noun",
                 "context2": "(kyoo _pih_ dih tee)"
@@ -229,6 +301,18 @@ module.exports = {
                 "text": "a downward slope",
                 "context1": "Because the village was situated on the _declivity_ of a hill, it never flooded.",
                 "context2": "Synonyms: decline; descent; drop; grade; pitch; slant; slope; tilt"
+            }
+        },
+        {
+            "front": {
+                "text": "Decorum",
+                "context1": "noun",
+                "context2": "(deh _kohr_ uhm)"
+            },
+            "back": {
+                "text": "appropriateness of behavior or conduct; propriety",
+                "context1": "The countess complained that the vulgar peasants lacked the _decorum_ appropriate for a visit to the plalace.",
+                "context2": "Synonyms: correctness; decency; etiquette; manners; mores; propriety; seemliness"
             }
         },
         {
@@ -289,6 +373,30 @@ module.exports = {
                 "text": "a funeral hymn or mournful speech",
                 "context1": "Melville wrote a dirge for the funeral of James McPherson, a Union general who was killed in 1864.",
                 "context2": "Synonyms: elegy; lament"
+            }
+        },
+        {
+            "front": {
+                "text": "Disabuse",
+                "context1": "verb",
+                "context2": "(dih suh _byuze_)"
+            },
+            "back": {
+                "text": "to set right; to free from error",
+                "context1": "Galileo's observations _disabused_ scholars of the notion that the sun revolved around the earth.",
+                "context2": "Synonyms: correct; undeceive"
+            }
+        },
+        {
+            "front": {
+                "text": "Divine",
+                "context1": "verb",
+                "context2": "(dih _vien_)"
+            },
+            "back": {
+                "text": "to fortell or know by inspiration",
+                "context1": "The fortune-teller _divined_ from the pattern of tea leaves that her customer would marry five times.",
+                "context2": "Synonyms: auger; foresee; intuit; predict; presage"
             }
         },
         {
@@ -365,6 +473,18 @@ module.exports = {
         },
         {
             "front": {
+                "text": "Enervate",
+                "context1": "verb",
+                "context2": "(ehn _uhr_ vayt)"
+            },
+            "back": {
+                "text": "to reduce in strength",
+                "context1": "The guerrillas hoped that a series of surprise attacks would _enervate_ the regular army.",
+                "context2": "Synonyms: debilitate; enfeeble; sap; weaken"
+            }
+        },
+        {
+            "front": {
                 "text": "Epicure",
                 "context1": "noun",
                 "context2": "(eh pih _kyoor_) (eh pih kyuhr)"
@@ -385,6 +505,18 @@ module.exports = {
                 "text": "to shun; to avoid (as something wrong or distasteful)",
                 "context1": "The filmmaker _eschewed_ artificial light for her actors, resulting in a stark movie style.",
                 "context2": "Synonyms: avoid; elude; escape; evade; shun; shy"
+            }
+        },
+        {
+            "front": {
+                "text": "Esoteric",
+                "context1": "adj",
+                "context2": "(eh suh _tehr_ ihk)"
+            },
+            "back": {
+                "text": "known or understood only b a few",
+                "context1": "Only a handful of experts are knowledgeable about the _esoteric_ world of particle physics.",
+                "context2": "Synonyms: abstruse; arcane; obscure"
             }
         },
         {
@@ -421,6 +553,18 @@ module.exports = {
                 "text": "a speech in praise of someone",
                 "context1": "His best friend gave the _eulogy_, outlining his many achievements and talents.",
                 "context2": "Synonyms: comment; extol; laud"
+            }
+        },
+        {
+            "front": {
+                "text": "Euphemism",
+                "context1": "noun",
+                "context2": "(_yoo_ fum ih zuhm)"
+            },
+            "back": {
+                "text": "use of an inoffensive word or phrase in place of a more distasteful one",
+                "context1": "The funeral director preferred to use the _euphemism_ \"sleeping\" instead of the word \"dead.\"",
+                "context2": "Synonyms: circumlocution; delicacy"
             }
         },
         {
@@ -469,6 +613,18 @@ module.exports = {
                 "text": "intensely emotional; feverish",
                 "context1": "The fans of Maria Callas were particularly _fervid_, doing anything to catch a glimpse of the great opera singer.",
                 "context2": "Synonyms: burning; impassioned; passionate; vehement; zealous"
+            }
+        },
+        {
+            "front": {
+                "text": "Florid",
+                "context1": "adj",
+                "context2": "(_flohr_ ihd) (_flahr_ ihd)"
+            },
+            "back": {
+                "text": "excessively decoreated or embellished",
+                "context1": "The palace had been decorated in an excessively _florid_ styl;e every surface had been carved adn gilded.",
+                "context2": "Synonyms: baroque; elaborate; flamboyant; ornate; ostentatious; rococo"
             }
         },
         {
@@ -533,6 +689,18 @@ module.exports = {
         },
         {
             "front": {
+                "text": "Hapless",
+                "context1": "adj",
+                "context2": "(_haap_ luhs)"
+            },
+            "back": {
+                "text": "unfortunate; having bad luck",
+                "context1": "I wish someone would give tha tpoor, _hapless_ soul some food and shelter.",
+                "context2": "Synonyms: ill-fated; ill-starred; jinxed; luckless; unlucky"
+            }
+        },
+        {
+            "front": {
                 "text": "Hyperbole",
                 "context1": "noun",
                 "context2": "(hie _puhr_ boh lee)"
@@ -569,6 +737,18 @@ module.exports = {
         },
         {
             "front": {
+                "text": "Ingratiate",
+                "context1": "verb",
+                "context2": "(ihn _gray_ shee ayt)"
+            },
+            "back": {
+                "text": "to gain favor with another by deliberate effort; to seek to please somebody so as to gain an advantage",
+                "context1": "The new intern tried to _ingratiate_ herself with the managers so that they might consider her for a future job.",
+                "context2": "Synonyms: curry favor; flatter"
+            }
+        },
+        {
+            "front": {
                 "text": "Inimical",
                 "context1": "adj",
                 "context2": "(ih _nihm_ ih kuhl)"
@@ -589,6 +769,30 @@ module.exports = {
                 "text": "a sin; an evil act",
                 "context1": "\"I promise to close every den of _iniquity_ in this town!\" thundered the conservative new mayor.",
                 "context2": "Synonyms: enormity; immorality; injsustice; vice; wickedness"
+            }
+        },
+        {
+            "front": {
+                "text": "Innocuous",
+                "context1": "adj",
+                "context2": "(ih _nahk_ yoo uhs)"
+            },
+            "back": {
+                "text": "harmless",
+                "context1": "Some snakes are poisonous, but most species are _innocuous_ and pose no danger to humans.",
+                "context2": "Synonyms: benign; harmless; inoffensive; insipid"
+            }
+        },
+        {
+            "front": {
+                "text": "Insurrection",
+                "context1": "noun",
+                "context2": "(ihn suh _rehk_ shuhn)"
+            },
+            "back": {
+                "text": "rebellion",
+                "context1": "After the emperor's troops crushed the _insurrection_, its leaders fled the country.",
+                "context2": "Synonyms: mutiny; revolt; revolution; uprising"
             }
         },
         {
@@ -676,6 +880,18 @@ module.exports = {
         },
         {
             "front": {
+                "text": "Lavish",
+                "context1": "adj",
+                "context2": "(_laa_ vish)"
+            },
+            "back": {
+                "text": "extremely generous or extravagant; giving unsparingly",
+                "context1": "She was so _lavish_ with her puppy that it soon became overweight and spoiled.",
+                "context2": "Synonyms: extravagant; exuberant; luxuriant; opulent; prodigal; profuse; superabundant"
+            }
+        },
+        {
+            "front": {
                 "text": "Legerdemain",
                 "context1": "noun",
                 "context2": "(lehj uhr duh _mayn_)"
@@ -684,6 +900,18 @@ module.exports = {
                 "text": "trickery",
                 "context1": "The little boy thought his _legerdemain_ was working on his mother, but she in fact knew about every hidden toy and stolen cookie.",
                 "context2": "Synonyms: chicanery; conjuring"
+            }
+        },
+        {
+            "front": {
+                "text": "Levity",
+                "context1": "noun",
+                "context2": "(_leh_ vih tee)"
+            },
+            "back": {
+                "text": "an inappropriate lack of seriousness; an overly casual atmosphere",
+                "context1": "The joke added a jarring note of _levity_ to the otherwise serious meeting.",
+                "context2": "Synonyms: amusement; humor"
             }
         },
         {
@@ -724,6 +952,18 @@ module.exports = {
         },
         {
             "front": {
+                "text": "Lionize",
+                "context1": "verb",
+                "context2": "(_lie_ uhn iez)"
+            },
+            "back": {
+                "text": "to treat as a celebrity",
+                "context1": "After the success of his novel, the author was _lionized_ by the press.",
+                "context2": "Synonyms: feast; honor; regale"
+            }
+        },
+        {
+            "front": {
                 "text": "Lissome",
                 "context1": "adj",
                 "context2": "(_lihs_ uhm)"
@@ -744,6 +984,18 @@ module.exports = {
                 "text": "lacking energy and enthusiasm",
                 "context1": "_Listless_ and depressed after breaking up with his girlfriend, Raj spent his days moping on the couth.",
                 "context2": "Synonyms: faineant; indolent; languid; lethargic; sluggish"
+            }
+        },
+        {
+            "front": {
+                "text": "Lucid",
+                "context1": "adj",
+                "context2": "(_loo_ sihd)"
+            },
+            "back": {
+                "text": "clear and easily understood",
+                "context1": "The explanations were written in a simple and _lucid_ manner so that students were immediately able to apply what they learned.",
+                "context2": "Synonyms: clear; coherent; explicit; intelligible; limpid"
             }
         },
         {
@@ -808,6 +1060,18 @@ module.exports = {
         },
         {
             "front": {
+                "text": "Misantorhope",
+                "context1": "noun",
+                "context2": "(_mihs_ ahn throp)"
+            },
+            "back": {
+                "text": "a person who dislikes others",
+                "context1": "The Grinch was such a _misanthrope_ that even the sight of children singing made him angry.",
+                "context2": "Synonym: curmudgeon"
+            }
+        },
+        {
+            "front": {
                 "text": "missive",
                 "context1": "noun",
                 "context2": "(_mihs_ ihv)"
@@ -828,6 +1092,30 @@ module.exports = {
                 "text": "to calm or make less severe",
                 "context1": "Their argument was so intense that it was difficult to believe any compromise would _mollify_ them.",
                 "context2": "Synonyms: appease; assuage; conciliate; pacity"
+            }
+        },
+        {
+            "front": {
+                "text": "Molt",
+                "context1": "verb",
+                "context2": "(muhlt)"
+            },
+            "back": {
+                "text": "to shed hair, skin, or an outer layer periodically",
+                "context1": "The snake _molted_ its skin and left it behind in a crumpled mass.",
+                "context2": "Synonyms: cast; defoliate; desquamate"
+            }
+        },
+        {
+            "front": {
+                "text": "Multifarious",
+                "context1": "adj",
+                "context2": "(muhl tuh _faar_ ee uhs)"
+            },
+            "back": {
+                "text": "diverse",
+                "context1": "Ken opened the hotel room window, letting in the _multifarious_ noises of the great city.",
+                "context2": "Synonyms: assorted; heterogeneous; indiscriminate; legion; motley; multifold; multiform; multiplex; populous; varied"
             }
         },
         {
@@ -892,6 +1180,18 @@ module.exports = {
         },
         {
             "front": {
+                "text": "Pithy",
+                "context1": "adj",
+                "context2": "(_pih_ thee)"
+            },
+            "back": {
+                "text": "profound or substantial yet concise, succinct, and to the point",
+                "context1": "Matha's _pithy_ comments during the interview must have been impressive because she got the job.",
+                "context2": "Synonyms: brief; compact; laconic; terse"
+            }
+        },
+        {
+            "front": {
                 "text": "Placate",
                 "context1": "verb",
                 "context2": "(_play_ cayt)"
@@ -916,6 +1216,41 @@ module.exports = {
         },
         {
             "front": {
+                "text": "Plucky",
+                "context1": "adj",
+                "context2": "(_pluh_ kee)"
+            },
+            "back": {
+                "text": "courageous; spunky",
+                "context1": "The _plucky_ young nurse dove into the foxhole, determined to help the wounded soldier.",
+                "context2": "Synonyms: brave; bold; gutsy"
+            }
+        },
+        {
+            "front": {
+                "text": "Polyglot",
+                "context1": "noun",
+                "context2": "(_pah_ lee glaht)"
+            },
+            "back": {
+                "text": "a speaker of many languages",
+                "context1": "Ling's extensive travels have helped her to become a true _polyglot_."
+            }
+        },
+        {
+            "front": {
+                "text": "Posit",
+                "context1": "verb",
+                "context2": "(_pah_ siht)"
+            },
+            "back": {
+                "text": "to assume as real or conceded; to propose as an explanation",
+                "context1": "Before proving the math formula, we needed to _posit_ that _x_ and _y_ were real numbers.",
+                "context2": "Synonyms: suggest"
+            }
+        },
+        {
+            "front": {
                 "text": "Precipitate",
                 "context1": "adj",
                 "context2": "(preh _sih_ puh tayt)"
@@ -924,6 +1259,18 @@ module.exports = {
                 "text": "thrown violently or brought about abruptly; lacking deliberation",
                 "context1": "Theirs was a _precipitate_ marriage - they had only known each other for two weeks before they wed.",
                 "context2": "Synonyms: abrupt; hasty; headlong; hurried; ill-considered; impetuous; impulsive; prompt; rash; reckless; sudden"
+            }
+        },
+        {
+            "front": {
+                "text": "Pungent",
+                "context1": "adj",
+                "context2": "(_puhn_ juhnt)"
+            },
+            "back": {
+                "text": "sharp and irritating to the senses",
+                "context1": "The smoke from the burning tires was extremely _pungent_.",
+                "context2": "Synonyms: acrid; caustic; piquant; poignant; stinging"
             }
         },
         {
@@ -1226,6 +1573,18 @@ module.exports = {
         },
         {
             "front": {
+                "text": "Vex",
+                "context1": "verb",
+                "context2": "(vehks)"
+            },
+            "back": {
+                "text": "to annoy, irritate, puzzle or confuse",
+                "context1": "The old man who loved his peace and quiet was _vexed_ by his neighbor's loud music.",
+                "context2": "Synonyms: annoy; bother; chafe; exasperate; irk; nettle; peeve; provoke"
+            }
+        },
+        {
+            "front": {
                 "text": "Vim",
                 "context1": "noun",
                 "context2": "(vihm)"
@@ -1286,6 +1645,30 @@ module.exports = {
         },
         {
             "front": {
+                "text": "Wily",
+                "context1": "adj",
+                "context2": "(_wie_ lee)"
+            },
+            "back": {
+                "text": "clever; deceptive",
+                "context1": "Yet again, the _wily_ coyote managed to elude the ranchers who wanted to capture it.",
+                "context2": "Synonyms: crafty; cunning; tricky"
+            }
+        },
+        {
+            "front": {
+                "text": "Wraith",
+                "context1": "noun",
+                "context2": "(rayth)"
+            },
+            "back": {
+                "text": "a ghost or specter; a ghost of a living person seen just before his or her death",
+                "context1": "Gideon thought he saw a _wraith_ late one night as he sat vigil outside his dying uncle's bedroom door.",
+                "context2": "Synonyms: apparition; bogeyman; phantasm; shade; spirit"
+            }
+        },
+        {
+            "front": {
                 "text": "Xenophobia",
                 "context1": "noun",
                 "context2": "(zee nuh _foh_ bee uh)"
@@ -1306,6 +1689,18 @@ module.exports = {
                 "text": "passion; excitement",
                 "context1": "She bought her typical _zeal_ to the project, sparking enthusiasm in the other team members.",
                 "context2": "Synonyms: ardency; fervor; fire; passion"
+            }
+        },
+        {
+            "front": {
+                "text": "Zenith",
+                "context1": "noun",
+                "context2": "(_zee_ nith)"
+            },
+            "back": {
+                "text": "the point of culmination; peak",
+                "context1": "The diva considered her appearance at the Metropolitan Opera to be the _zenith_ of her career.",
+                "context2": "Synonyms: acme; pinnacle"
             }
         },
         {
