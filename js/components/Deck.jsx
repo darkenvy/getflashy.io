@@ -55,6 +55,15 @@ class Deck extends React.Component {
         $(document).off('keydown.deck');
     }
 
+    configureDeck(deck) {
+
+        if (this.props.config.randomize) {
+            deck.cards = _.shuffle(deck.cards);
+        }
+
+        // TODO: Front or back
+    }
+
     fetchDeckInfo(deckId) {
         $.ajax({
             url: '/api/decks/' + deckId,
@@ -62,6 +71,7 @@ class Deck extends React.Component {
             cache: false,
             success: function(data) {
                 console.log('Successfully loaded deck: ' + deckId);
+                this.configureDeck(data);
                 this.setState({ deck: data });
             }.bind(this),
             error: function(xhr, status, err) {

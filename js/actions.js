@@ -50,10 +50,11 @@ export const configureDeck = (deckId) => {
     }
 };
 
-export const startDeck = (deckId) => {
+export const startDeck = (deckId, config) => {
     browserHistory.push('/decks/' + deckId); // TODO: This is probably very, very bad, but how do we programmatically navigate?
     return {
         type: 'START_DECK',
-        deckId: deckId
+        deckId: deckId,
+        config: config
     }
 };

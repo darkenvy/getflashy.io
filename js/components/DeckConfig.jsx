@@ -1,25 +1,35 @@
 import React from 'react';
 // import { Link } from 'react-router';
-import { FormGroup, ButtonGroup, Button, ControlLabel, HelpBlock, Panel } from 'react-bootstrap';
+import { FormGroup, ButtonGroup, Button, ControlLabel, HelpBlock, Panel, Checkbox } from 'react-bootstrap';
 
 class DeckConfig extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { showSide: 'front' };
+        this.state = { showSide: 'front', randomize: true };
 
         // Manually bind this method to the component instance so "this" is what we expect
         this.startDeck = this.startDeck.bind(this);
         this.setShowSide = this.setShowSide.bind(this);
+        this.toggleRandomize = this.toggleRandomize.bind(this);
     }
 
     startDeck() {
-        // TODO: Validation of inputsw
-        this.props.onDeckConfigure(this.props.deckId);
+
+        // TODO: Validation of inputs
+        const config = {
+            showSide: this.state.showSide,
+            randomize: this.state.randomize
+        };
+        this.props.onDeckConfigure(this.props.deckId, config);
     }
 
     setShowSide(side) {
         this.setState({ showSide: side });
+    }
+
+    toggleRandomize() {
+        this.setState({ randomize: !this.state.randomize });
     }
 
     render() {
@@ -49,6 +59,26 @@ class DeckConfig extends React.Component {
                         </div>
                     </FormGroup>
 
+                    <FormGroup controlId="formBasicText">
+                        <ControlLabel className="config-label">Show details:</ControlLabel>
+                        <div className="nonstandard-form-control">
+                            <ButtonGroup>
+                                <Button onClick={() => { ; }}
+                                        bsStyle={this.state.showDetails === 'always' ? 'primary' : 'default'}>Always</Button>
+                                <Button onClick={() => { ; }}
+                                        bsStyle={this.state.showDetails === 'never' ? 'primary' : 'default'}>Never</Button>
+                                <Button onClick={() => { ; }}
+                                        bsStyle={this.state.showDetails === 'beforeFlipping' ? 'primary' : 'default'}>Before flipping</Button>
+                            </ButtonGroup>
+                        </div>
+                    </FormGroup>
+
+                    <FormGroup controlId="formBasicText">
+                        <ControlLabel className="config-label">Miscellaney:</ControlLabel>
+                        <div className="nonstandard-form-control">
+                            <Checkbox checked={this.state.randomize} onChange={this.toggleRandomize}>Randomize</Checkbox>
+                        </div>
+                    </FormGroup>
 
                     <div className="config-submit-button-area">
                         <Button onClick={this.startDeck}>Start flipping!</Button>

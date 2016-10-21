@@ -1,4 +1,5 @@
 import React from 'react';
+import marked from 'marked';
 
 class Card extends React.Component {
 
@@ -17,14 +18,14 @@ class Card extends React.Component {
     render() {
 
         var card = this.props.card;
-        var text = this.props.flipped ? card.back : card.front;
+        var side = this.props.flipped ? card.back : card.front;
 
-        var context1 = this.props.flipped ? card.backContext1 : card.frontContext1;
+        var context1 = side.context1;
         var context1Style = {
             display: context1 ? 'block' : 'none'
         };
 
-        var context2 = this.props.flipped ? card.backContext2 : card.frontContext2;
+        var context2 = side.context2;
         var context2Style = {
             display: context2 ? 'block' : 'none'
         };
@@ -41,19 +42,17 @@ class Card extends React.Component {
                 <div className="card-content">
                     <div className="card-content-wrapper">
                         <div className="main-card-content">
-                            {text}
+                            {side.text}
                         </div>
-                        <div className="context-1" style={context1Style}>
-                            {context1}
+                        <div className="context-1" style={context1Style} dangerouslySetInnerHTML={{__html: marked(context1)}}>
                         </div>
-                        <div className="context-2" style={context2Style}>
-                            {context2}
+                        <div className="context-2" style={context2Style} dangerouslySetInnerHTML={{__html: marked(context2)}}>
                         </div>
                     </div>
                 </div>
 
                 <div className="frontHint" style={frontHintStyle}>
-                    {this.props.card.front}
+                    {this.props.card.front.text}
                 </div>
             </div>
         );

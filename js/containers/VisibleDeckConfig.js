@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onDeckConfigure: (deckId) => {
-            dispatch(startDeck(deckId));
+        onDeckConfigure: (deckId, config) => {
+            dispatch(startDeck(deckId, config));
         }
     };
 };

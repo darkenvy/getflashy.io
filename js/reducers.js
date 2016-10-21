@@ -24,8 +24,18 @@ const deckMetadata/*Reducer*/ = (state = {}, action) => {
     return state;
 };
 
+const config/*Reducer*/ = (state = { randomize: false, showSide: 'front' }, action) => {
+    switch (action.type) {
+        case 'START_DECK':
+            return action.config;
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
     currentDeck,
+    config,
     decks,
     deckMetadata
 });
