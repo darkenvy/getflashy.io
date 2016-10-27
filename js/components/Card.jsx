@@ -5,7 +5,7 @@ class Card extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { showing: 'front' };
+        this.state = { showing: 'front', visibility: 'visible', dragStartX: -1 };
 
     }
 
@@ -15,10 +15,36 @@ class Card extends React.Component {
     componentDidMount() {
     }
 
+    onDrag(e) {
+        console.log('Dragging! - ' + e.screenX);
+        this.setState({ visibility: 'hidden', dragStartX: e.screenX });
+    }
+
+    onDrop(e) {
+
+        const delta = e.screenX - this.state.dragStartX;
+        console.log(e.screenX, this.state.dragStartX, delta);
+        if (delta > 100) {
+            // Swipe to the right => knew the word
+            this.props.advance(true);
+        }
+        else if (delta < -100) {
+            // Swipe to the left => didn't know the card
+            this.props.advance(false);
+        }
+
+        console.log('Dropped');
+        this.setState({ visibility: 'visible', dragStartX: -1 });
+    }
+
     render() {
 
         var card = this.props.card;
         var side = this.props.flipped ? card.back : card.front;
+
+        const cardStyle = {
+            visibility: this.state.visibility
+        };
 
         var context1 = side.context1;
         var context1Style = {
@@ -35,7 +61,7 @@ class Card extends React.Component {
         };
 
         return (
-            <div className="card">
+            <div className="card" style={cardStyle} draggable="true" onDrag={this.onDrag.bind(this)} onDragEnd={this.onDrop.bind(this)}>
 
                 <div className="card-top"></div>
 

@@ -3,12 +3,15 @@ import $ from 'jquery';
 import Card from './Card';
 import DeckStatus from './DeckStatus';
 import { Link } from 'react-router';
+import ProgressBar from 'react-progress-bar-plus';
+import Timer from './Timer';
 
 class Deck extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { deck: {}, curCard: 0, cardFlipped: false };
+        this.state = { deck: {}, curCard: 0, cardFlipped: false,
+                correctCount: 0, startTime: null };
 
     }
 
@@ -23,14 +26,10 @@ class Deck extends React.Component {
         $(document).on('keydown.deck', (e) => {
             switch (e.key) {
                 case 'ArrowRight':
-                    if (this.state.curCard < this.state.deck.cards.length - 1) {
-                        this.setState({ curCard: this.state.curCard + 1, cardFlipped: false });
-                    }
+                    this.advance(true);
                     break;
                 case 'ArrowLeft':
-                    if (this.state.curCard > 0) {
-                        this.setState({ curCard: this.state.curCard - 1, cardFlipped: false });
-                    }
+                    this.advance(false);
                     break;
                 case 'ArrowDown':
                     if (!this.state.cardFlipped) {
@@ -48,6 +47,17 @@ class Deck extends React.Component {
                     break;
             }
         });
+
+        this.setState({ correctCount: 0, startTime: new Date() });
+    }
+
+    advance(knewCard) {
+
+        const newCorrectCount = knewCard ? this.state.correctCount + 1 : this.state.correctCount;
+
+        if (this.state.curCard < this.state.deck.cards.length - 1) {
+            this.setState({ curCard: this.state.curCard + 1, correctCount: newCorrectCount, cardFlipped: false });
+        }
     }
 
     componentWillUnmount() {
@@ -102,7 +112,12 @@ class Deck extends React.Component {
 
     render() {
 
-        var fillHeight = { height: '100%' };
+        if (!this.state.deck.cards) {
+            return (<div></div>); // Not yet fetched
+        }
+
+        const fillHeight = { height: '100%' };
+        const percent = this.state.curCard / (this.state.deck.cards.length - 1) * 100;
 
         return (
             <div style={fillHeight}>
@@ -118,14 +133,18 @@ class Deck extends React.Component {
 
                             return (
                                 <div className="deck">
+                                    <ProgressBar spinner={false} percent={percent}/>
                                     <div className="deck-nav left-nav">
                                         <i className="fa fa-chevron-left" aria-hidden="true"></i>
                                     </div>
                                     <div className="deck-card-section">
-                                        <Card key={card.front} card={card} flipped={this.state.cardFlipped}/>
+                                        <Timer startTime={this.state.startTime}></Timer>
+                                        <Card key={card.front} card={card} flipped={this.state.cardFlipped}
+                                                advance={this.advance.bind(this)}/>
 
                                         <div>
-                                            <DeckStatus curCard={this.state.curCard + 1} cardCount={cards.length} />
+                                            <DeckStatus curCard={this.state.curCard + 1} cardCount={cards.length}
+                                                    correctCount={this.state.correctCount}/>
                                         </div>
                                     </div>
                                     <div className="deck-nav right-nav" >

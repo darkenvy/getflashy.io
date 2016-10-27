@@ -14,6 +14,7 @@ import createLogger from 'redux-logger'; // Log actions
 
 import 'font-awesome/css/font-awesome.css';
 import 'app.less';
+import 'react-progress-bar-plus/lib/progress-bar.css';
 
 const loggerMiddleware = createLogger();
 const store = createStore(rootReducer,

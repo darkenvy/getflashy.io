@@ -9,12 +9,11 @@ export class DeckStatus extends React.Component {
 
     render() {
 
-        var deck = this.props.deck;
         var date = new Date().toString();
 
         return (
             <div className="deck-status">
-                {this.props.curCard} / {this.props.cardCount}
+                {this.props.curCard} / {this.props.cardCount} (<font color="green">{this.props.correctCount}</font>)
             </div>
         );
     }
