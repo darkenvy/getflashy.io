@@ -47,7 +47,7 @@ export const configureDeck = (deckId) => {
     return {
         type: 'CONFIGURE_DECK',
         deckId: deckId
-    }
+    };
 };
 
 export const startDeck = (deckId, config) => {
@@ -56,5 +56,13 @@ export const startDeck = (deckId, config) => {
         type: 'START_DECK',
         deckId: deckId,
         config: config
-    }
+    };
+};
+
+export const showResults = (deckId) => {
+    browserHistory.push('/results/' + deckId); // TODO: This is probably very, very bad, but how do we programmatically navigate?
+    return {
+        type: 'SHOW_RESULTS',
+        deckId: deckId
+    };
 };

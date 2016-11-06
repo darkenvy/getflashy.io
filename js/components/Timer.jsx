@@ -12,7 +12,7 @@ class Timer extends React.Component {
             const seconds = Math.floor((new Date().getTime() - this.props.startTime) / 1000);
             this.setState({ seconds: seconds, timespanStr: this.createTimespanStr(seconds) });
         }, 1000);
-        this.setState({ intervalHandle: intervalHandle });
+        this.setState({ intervalHandle: intervalHandle, timespanStr: '0:00' });
     }
 
     componentWillUnmount() {

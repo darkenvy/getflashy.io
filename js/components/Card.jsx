@@ -47,11 +47,13 @@ class Card extends React.Component {
         };
 
         var context1 = side.context1;
+        context1 = context1 ? marked(context1) : context1;
         var context1Style = {
             display: context1 ? 'block' : 'none'
         };
 
         var context2 = side.context2;
+        context2 = context2 ? marked(context2) : context2;
         var context2Style = {
             display: context2 ? 'block' : 'none'
         };
@@ -70,9 +72,9 @@ class Card extends React.Component {
                         <div className="main-card-content">
                             {side.text}
                         </div>
-                        <div className="context-1" style={context1Style} dangerouslySetInnerHTML={{__html: marked(context1)}}>
+                        <div className="context-1" style={context1Style} dangerouslySetInnerHTML={{__html: context1}}>
                         </div>
-                        <div className="context-2" style={context2Style} dangerouslySetInnerHTML={{__html: marked(context2)}}>
+                        <div className="context-2" style={context2Style} dangerouslySetInnerHTML={{__html: context2}}>
                         </div>
                     </div>
                 </div>

@@ -3,12 +3,20 @@ module.exports = {
     name: 'State Capitals',
     cards: [
         {
-            front: 'North Carolina',
-            back: 'Raleigh'
+            front: {
+                text: 'North Carolina'
+            },
+            back: {
+                text: 'Raleigh'
+            }
         },
         {
-            front: 'South Carolina',
-            back: 'Columbia'
+            front: {
+                text: 'South Carolina'
+            },
+            back: {
+                text: 'Columbia'
+            }
         }
     ]
 };

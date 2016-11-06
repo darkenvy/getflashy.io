@@ -13,6 +13,8 @@ class Deck extends React.Component {
         this.state = { deck: {}, curCard: 0, cardFlipped: false,
                 correctCount: 0, startTime: null };
 
+        // Manually bind this method to the component instance so "this" is what we expect
+        this.deckCompleted = this.deckCompleted.bind(this);
     }
 
     componentWillMount() {
@@ -57,6 +59,9 @@ class Deck extends React.Component {
 
         if (this.state.curCard < this.state.deck.cards.length - 1) {
             this.setState({ curCard: this.state.curCard + 1, correctCount: newCorrectCount, cardFlipped: false });
+        }
+        else {
+            this.deckCompleted();
         }
     }
 
@@ -110,14 +115,21 @@ class Deck extends React.Component {
         );
     }
 
+    deckCompleted() {
+        this.props.onDeckCompleted(this.props.deckId);
+    }
+
     render() {
 
+        if (this.state.curCard === -1) {
+            return this.noSuchDeck();
+        }
         if (!this.state.deck.cards) {
             return (<div></div>); // Not yet fetched
         }
 
         const fillHeight = { height: '100%' };
-        const percent = this.state.curCard / (this.state.deck.cards.length - 1) * 100;
+        const percent = this.state.curCard / this.state.deck.cards.length * 100;
 
         return (
             <div style={fillHeight}>
@@ -152,10 +164,6 @@ class Deck extends React.Component {
                                     </div>
                                 </div>
                             )
-                        }
-
-                        else if (this.state.curCard === -1) {
-                            return this.noSuchDeck();
                         }
 
                         return this.loadingScreen();

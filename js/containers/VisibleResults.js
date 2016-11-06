@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
-import Deck from '../components/Deck';
-import { showResults } from '../actions';
+import Results from '../components/Results';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -11,15 +10,12 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onDeckCompleted: (deckId) => {
-            dispatch(showResults(deckId));
-        }
     };
 };
 
-const VisibleDeck = connect(
+const VisibleResults = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Deck);
+)(Results);
 
-export default VisibleDeck;
+export default VisibleResults;
