@@ -1,6 +1,11 @@
 module.exports = {
 
     name: 'State Capitals',
+    icon: {
+        name: 'flag',
+        color: '#6060ff'
+    },
+
     cards: [
         {
             front: {

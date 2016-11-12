@@ -34,12 +34,13 @@ class DeckList extends React.Component {
         return (
             <div className="container">
                 <DeckFilter label="Filter decks:" helpText={this.state.deckId} onChange={this.onDeckFilterChange}/>
-
-                {
-                    Object.keys(filteredDecks).map(function(key) {
-                        return <DeckButton key={key} deck={filteredDecks[key]} onClick={self.props.onDeckClick}/>
-                    })
-                }
+                    <div className="deck-buttons">
+                    {
+                        Object.keys(filteredDecks).map(function(key) {
+                            return <DeckButton key={key} deck={filteredDecks[key]} onClick={self.props.onDeckClick}/>
+                        })
+                    }
+                    </div>
             </div>
         );
     }

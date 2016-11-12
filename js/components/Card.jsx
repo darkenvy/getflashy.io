@@ -15,6 +15,10 @@ class Card extends React.Component {
     componentDidMount() {
     }
 
+    onClick(e) {
+        this.props.toggleVisibleSide(e);
+    }
+
     onDrag(e) {
         console.log('Dragging! - ' + e.screenX);
         this.setState({ visibility: 'hidden', dragStartX: e.screenX });
@@ -63,7 +67,8 @@ class Card extends React.Component {
         };
 
         return (
-            <div className="card" style={cardStyle} draggable="true" onDrag={this.onDrag.bind(this)} onDragEnd={this.onDrop.bind(this)}>
+            <div className="card" style={cardStyle} draggable="true"
+                 onClick={this.onClick.bind(this)} onDrag={this.onDrag.bind(this)} onDragEnd={this.onDrop.bind(this)}>
 
                 <div className="card-top"></div>
 

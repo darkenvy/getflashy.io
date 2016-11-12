@@ -1,13 +1,15 @@
-var express = require('express');
-var livereload = require('express-livereload');
-var app = express();
+'use strict';
 
-var compression = require('compression');
+const express = require('express');
+//const livereload = require('express-livereload');
+const app = express();
+
+const compression = require('compression');
 app.use(compression());
 
-var fs = require('fs');
-var path = require('path');
-var async = require('async');
+const fs = require('fs');
+const path = require('path');
+const async = require('async');
 
 const decks = {};
 const deckDir = path.join(__dirname, 'decks');
@@ -27,10 +29,11 @@ const createDeckMetadata = (decks) => {
 
     const metadata = {};
 
-    for (var deckId in decks) {
-        var deck = decks[deckId];
+    for (let deckId in decks) {
+        let deck = decks[deckId];
         metadata[deckId] = {
             name: deck.name,
+            icon: deck.icon,
             id: deck.id,
             modified: deck.modified,
             size: deck.cards.length
@@ -49,7 +52,7 @@ app.get('/api/decks/:deckId', (req, res) => {
 
     res.type('application/json');
 
-    var deck = decks[req.params.deckId];
+    let deck = decks[req.params.deckId];
     if (deck) {
         res.json(deck);
     }
@@ -67,4 +70,4 @@ app.get('/*', (req, res) => {
 });
 
 app.listen(process.env.PORT || 8080);
-livereload(app);
+//livereload(app);

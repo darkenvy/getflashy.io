@@ -9,6 +9,9 @@
     "watch": "webpack --watch",
     "start": "node server.js"
   },
+  "engines": {
+    "node": "~4.2"
+  },
   "babel": {
     "presets": [
       "es2015"
@@ -16,8 +19,11 @@
   },
   "dependencies": {
     "async": "^1.5.2",
+    "bootstrap": "^3.3.7",
+    "bootswatch": "^3.3.7",
     "compression": "^1.6.2",
     "express": "^4.13.4",
+    "express-livereload": "0.0.24",
     "font-awesome": "^4.6.3",
     "jquery": "^3.1.1",
     "lodash": "^4.16.2",
@@ -39,7 +45,6 @@
     "babel-preset-react": "^6.11.1",
     "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.25.0",
-    "express-livereload": "0.0.24",
     "file-loader": "^0.9.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",

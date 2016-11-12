@@ -1,5 +1,11 @@
 module.exports = {
+
     name: 'Fruit or Vegetable',
+    icon: {
+        name: 'apple',
+        color: '#ff6060'
+    },
+
     cards: [
         {
             front: {

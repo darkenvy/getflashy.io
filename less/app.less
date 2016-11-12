@@ -13,27 +13,53 @@ html, body {
   }
 }
 
-.deck-button {
 
-  vertical-align: middle;
-  text-align: center;
-  background: #f0f0f0;
-  border: 1px solid @card-border;
-  border-radius: 3px;
+.deck-buttons {
 
-  width: 80%;
   margin: 0 auto;
-  margin-bottom: 1rem;
 
-  cursor: pointer;
+  @media screen and (max-width: 990px) {
+    text-align: center;
+  }
+  @media screen and (min-width: 991px) {
+    max-width: ~"calc(400px + 400px + 4 * 1rem)";
+  }
 
-  .deck-details {
-    margin: 1rem 0;
+  .deck-button {
 
-    .deck-title {
-      font-weight: bolder;
+    vertical-align: middle;
+    text-align: center;
+    background: #f0f0f0;
+    border: 1px solid @card-border;
+    border-radius: 3px;
+
+    transition-property: color, background;
+    transition-duration: .3s;
+
+    width: 400px;
+    display: inline-block;
+    margin: 1rem 1rem 1rem 1rem;
+
+    cursor: pointer;
+
+    .deck-details {
+      margin: 1rem 0;
+
+      .deck-icon {
+        font-size: 5rem;
+      }
+
+      .deck-title {
+        font-weight: bolder;
+      }
+    }
+
+    &:hover {
+      background: #2c3e50;
+      color: white;
     }
   }
+
 }
 
 .deck {

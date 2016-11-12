@@ -119,6 +119,12 @@ class Deck extends React.Component {
         this.props.onDeckCompleted(this.props.deckId);
     }
 
+    toggleCardVisibleSide(e) {
+        this.setState({ cardFlipped: !this.state.cardFlipped });
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
     render() {
 
         if (this.state.curCard === -1) {
@@ -152,7 +158,8 @@ class Deck extends React.Component {
                                     <div className="deck-card-section">
                                         <Timer startTime={this.state.startTime}></Timer>
                                         <Card key={card.front} card={card} flipped={this.state.cardFlipped}
-                                                advance={this.advance.bind(this)}/>
+                                                advance={this.advance.bind(this)}
+                                                toggleVisibleSide={this.toggleCardVisibleSide.bind(this)}/>
 
                                         <div>
                                             <DeckStatus curCard={this.state.curCard + 1} cardCount={cards.length}

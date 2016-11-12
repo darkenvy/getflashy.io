@@ -13,6 +13,10 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import thunkMiddleware from 'redux-thunk'; // Allow action creators to return functions for async operations
 import createLogger from 'redux-logger'; // Log actions
 
+// First bootstrap, then the bootstrap theme to apply
+// import 'bootstrap/dist/css/bootstrap.css'
+import 'bootswatch/flatly/bootstrap.css';
+
 import 'font-awesome/css/font-awesome.css';
 import 'app.less';
 import 'react-progress-bar-plus/lib/progress-bar.css';

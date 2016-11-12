@@ -1,6 +1,10 @@
 module.exports = {
 
     name: 'Vocabulary Words',
+    icon: {
+        name: 'comment-o',
+        color: 'black'
+    },
 
     cards: [
         {
