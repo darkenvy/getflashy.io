@@ -66,3 +66,10 @@ export const showResults = (deckId) => {
         deckId: deckId
     };
 };
+
+export const goHome = () => {
+    browserHistory.push('/'); // TODO: This is probably very, very bad, but how do we programmatically navigate?
+    return {
+        type: 'RETURN_HOME'
+    };
+};

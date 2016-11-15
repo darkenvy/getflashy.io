@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import Results from '../components/Results';
+import { goHome } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -10,6 +11,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        onStartNewDeck: (deckId, config) => {
+            dispatch(goHome(deckId, config));
+        }
     };
 };
 

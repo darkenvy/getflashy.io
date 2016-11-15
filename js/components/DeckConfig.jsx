@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Link } from 'react-router';
-import { FormGroup, ButtonGroup, Button, ControlLabel, HelpBlock, Panel, Checkbox } from 'react-bootstrap';
+import { Col, Form, FormGroup, ButtonGroup, Button, ControlLabel, HelpBlock, Panel, Checkbox } from 'react-bootstrap';
 
 class DeckConfig extends React.Component {
 
@@ -37,51 +37,56 @@ class DeckConfig extends React.Component {
         return (
             <div className="container">
 
-                <div className="config-header">
-                    <h2>Get Ready!</h2>
-                    <p>
-                        Let us know how you'd like to go through this deck of flashcards.
-                    </p>
-                </div>
-
                 <Panel className="app-form">
 
-                    <FormGroup controlId="formBasicText">
-                        <ControlLabel className="config-label">Show me:</ControlLabel>
-                        <div className="nonstandard-form-control">
-                            <ButtonGroup>
-                                <Button onClick={() => { this.setShowSide('front'); }}
-                                    bsStyle={this.state.showSide === 'front' ? 'primary' : 'default'}>Front side</Button>
-                                <Button onClick={() => { this.setShowSide('back'); }}
-                                    bsStyle={this.state.showSide !== 'front' ? 'primary' : 'default'}>Back side</Button>
-                            </ButtonGroup>
-                            <HelpBlock className="inline-help-block">("Front side" is typical)</HelpBlock>
-                        </div>
-                    </FormGroup>
+                    <div className="config-header" fill>
+                        <h2>Get Ready!</h2>
+                        <p>
+                            Let us know how you'd like to go through this deck of flashcards.
+                        </p>
+                    </div>
 
-                    <FormGroup controlId="formBasicText">
-                        <ControlLabel className="config-label">Show details:</ControlLabel>
-                        <div className="nonstandard-form-control">
-                            <ButtonGroup>
-                                <Button onClick={() => { ; }}
-                                        bsStyle={this.state.showDetails === 'always' ? 'primary' : 'default'}>Always</Button>
-                                <Button onClick={() => { ; }}
-                                        bsStyle={this.state.showDetails === 'never' ? 'primary' : 'default'}>Never</Button>
-                                <Button onClick={() => { ; }}
-                                        bsStyle={this.state.showDetails === 'beforeFlipping' ? 'primary' : 'default'}>Before flipping</Button>
-                            </ButtonGroup>
-                        </div>
-                    </FormGroup>
+                    <Form horizontal>
 
-                    <FormGroup controlId="formBasicText">
-                        <ControlLabel className="config-label">Miscellaney:</ControlLabel>
-                        <div className="nonstandard-form-control">
-                            <Checkbox checked={this.state.randomize} onChange={this.toggleRandomize}>Randomize</Checkbox>
-                        </div>
-                    </FormGroup>
+                        <FormGroup controlId="formBasicText">
+                            {/*<ControlLabel className="config-label">Show me:</ControlLabel>*/}
+                            <Col componentClass={ControlLabel} className="config-label" sm={3}>Show me:</Col>
+                            <Col sm={8}>
+                                <ButtonGroup>
+                                    <Button onClick={() => { this.setShowSide('front'); }}
+                                        bsStyle={this.state.showSide === 'front' ? 'primary' : 'default'}>Front side</Button>
+                                    <Button onClick={() => { this.setShowSide('back'); }}
+                                        bsStyle={this.state.showSide !== 'front' ? 'primary' : 'default'}>Back side</Button>
+                                </ButtonGroup>
+                                <HelpBlock className="inline-help-block">("Front side" is typical)</HelpBlock>
+                            </Col>
+                        </FormGroup>
+
+                        <FormGroup controlId="formBasicText">
+                            <Col componentClass={ControlLabel} className="config-label" sm={3}>Show details:</Col>
+                            <Col sm={8}>
+                                <ButtonGroup>
+                                    <Button onClick={() => { ; }}
+                                            bsStyle={this.state.showDetails === 'always' ? 'primary' : 'default'}>Always</Button>
+                                    <Button onClick={() => { ; }}
+                                            bsStyle={this.state.showDetails === 'never' ? 'primary' : 'default'}>Never</Button>
+                                    <Button onClick={() => { ; }}
+                                            bsStyle={this.state.showDetails === 'beforeFlipping' ? 'primary' : 'default'}>Before flipping</Button>
+                                </ButtonGroup>
+                            </Col>
+                        </FormGroup>
+
+                        <FormGroup controlId="formBasicText">
+                            <Col componentClass={ControlLabel} className="config-label" sm={3}>Miscellaney:</Col>
+                            <Col sm={8}>
+                                <Checkbox checked={this.state.randomize} onChange={this.toggleRandomize}>Randomize</Checkbox>
+                            </Col>
+                        </FormGroup>
+
+                    </Form>
 
                     <div className="config-submit-button-area">
-                        <Button onClick={this.startDeck}>Start flipping!</Button>
+                        <Button bsStyle="success" onClick={this.startDeck}>Start flipping!</Button>
                     </div>
                 </Panel>
             </div>

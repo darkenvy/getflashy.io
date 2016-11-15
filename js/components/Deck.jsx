@@ -15,6 +15,7 @@ class Deck extends React.Component {
 
         // Manually bind this method to the component instance so "this" is what we expect
         this.deckCompleted = this.deckCompleted.bind(this);
+        this.advance = this.advance.bind(this);
     }
 
     componentWillMount() {
@@ -152,7 +153,7 @@ class Deck extends React.Component {
                             return (
                                 <div className="deck">
                                     <ProgressBar spinner={false} percent={percent}/>
-                                    <div className="deck-nav left-nav">
+                                    <div className="deck-nav left-nav" onClick={() => { this.advance(false); }}>
                                         <i className="fa fa-chevron-left" aria-hidden="true"></i>
                                     </div>
                                     <div className="deck-card-section">
@@ -166,7 +167,7 @@ class Deck extends React.Component {
                                                     correctCount={this.state.correctCount}/>
                                         </div>
                                     </div>
-                                    <div className="deck-nav right-nav" >
+                                    <div className="deck-nav right-nav" onClick={() => { this.advance(true); }}>
                                         <i className="fa fa-chevron-right" aria-hidden="true" ></i>
                                     </div>
                                 </div>
