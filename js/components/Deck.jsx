@@ -138,6 +138,12 @@ class Deck extends React.Component {
         const fillHeight = { height: '100%' };
         const percent = this.state.curCard / this.state.deck.cards.length * 100;
 
+        const nextCardStyle = {
+            zIndex: -100,
+            position: 'absolute',
+            width: '100%'
+        };
+
         return (
             <div style={fillHeight}>
 
@@ -147,8 +153,9 @@ class Deck extends React.Component {
 
                         if (this.state.deck.id) {
 
-                            var cards = this.state.deck.cards;
-                            var card = cards[this.state.curCard];
+                            const cards = this.state.deck.cards;
+                            const card = cards[this.state.curCard];
+                            const nextCard = this.state.curCard < cards.length - 1 ? cards[this.state.curCard + 1] : null;
 
                             return (
                                 <div className="deck">
@@ -158,7 +165,18 @@ class Deck extends React.Component {
                                     </div>
                                     <div className="deck-card-section">
                                         <Timer startTime={this.state.startTime}></Timer>
-                                        <Card key={card.front} card={card} flipped={this.state.cardFlipped}
+                                        {(() => {
+                                            if (nextCard) {
+                                                return (
+                                                    <div style={nextCardStyle}>
+                                                        <Card key={nextCard.front.text} card={nextCard} flipped={false}/>
+                                                    </div>
+                                                );
+                                            }
+                                            return '';
+                                        })()
+                                        }
+                                        <Card key={card.front.text} card={card} flipped={this.state.cardFlipped}
                                                 advance={this.advance.bind(this)}
                                                 toggleVisibleSide={this.toggleCardVisibleSide.bind(this)}/>
 

@@ -43,26 +43,26 @@ class Card extends React.Component {
 
     render() {
 
-        var card = this.props.card;
-        var side = this.props.flipped ? card.back : card.front;
+        const card = this.props.card;
+        const side = this.props.flipped ? card.back : card.front;
 
         const cardStyle = {
             visibility: this.state.visibility
         };
 
-        var context1 = side.context1;
+        let context1 = side.context1;
         context1 = context1 ? marked(context1) : context1;
-        var context1Style = {
+        const context1Style = {
             display: context1 ? 'block' : 'none'
         };
 
-        var context2 = side.context2;
+        let context2 = side.context2;
         context2 = context2 ? marked(context2) : context2;
-        var context2Style = {
+        const context2Style = {
             display: context2 ? 'block' : 'none'
         };
 
-        var frontHintStyle = {
+        const frontHintStyle = {
             display: this.props.flipped ? 'block' : 'none'
         };
 
