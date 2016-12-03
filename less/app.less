@@ -8,8 +8,13 @@ html, body {
 #app-content, div[data-reactroot] {
   height: 100%;
 
+  .navbar {
+    margin-bottom: 20px;
+  }
+
   .main-content {
-    height: ~"calc(100% - 72px)"; // Leave space for menu bar
+    height: ~"calc(100% - 60px - 20px)"; // Leave space for navbar
+    overflow-x: hidden;
   }
 }
 
@@ -78,6 +83,8 @@ html, body {
     color: #f0f0f0;
     cursor: pointer;
 
+    transition: color .5s, background .5s;
+
     &:hover {
       color: black;
       background: #f0f0f0;
@@ -96,62 +103,100 @@ html, body {
     }
   }
 
-  .card {
-
-    //transition: padding 5s ease-in-out;
-    //padding: 0;
-
-    .card-top { // Just a decoration at the top of a card
+  @keyframes slide-right {
+    from {
+      opacity: 1;
+      margin-left: 0;
       width: 100%;
-      height: 4rem;
-      background: blue;
-      border-bottom: 1px solid @card-border;
     }
-
-    .card-content {
-      height: ~"calc(100% - 4rem - 2rem)"; // .card-top and .frontHint
-      display: flex;
-      justify-content: center;
-
-      .card-content-wrapper {
-
-        font-size: larger;
-        align-self: center;
-        text-align: center;
-        margin: 0 5rem;
-
-        .main-card-content {
-          font-size: x-large;
-          font-weight: bold;
-        }
-        .context-1 {
-          margin-top: 1rem;
-        }
-        .context-2 {
-          margin-top: 1rem;
-          color: @less-important-text-color;
-        }
-      }
+    to {
+      opacity: 0;
+      margin-left: 500px;
+      width: 100%;
     }
+  }
 
-    .frontHint {
-      color: @less-important-text-color;
-      font-style: italic;
-      height: 2rem; // Ugh, getting around bootstrap px-vs-rem issue here.  Should be fixed in Bootstrap 4
-      text-align: right;
-      margin-right: 1rem;
+  @keyframes slide-left {
+    from {
+      opacity: 1;
+      margin-left: 0;
+      width: 100%;
     }
+    to {
+      opacity: 0;
+      margin-left: -500px;
+      width: 100%;
+    }
+  }
 
+  .card-wrapper {
+
+    margin: 0 auto;
     width: 60%;
     min-width: 400px;
     max-width: 800px;
+    overflow-x: visible;
 
-    height: 300px;
-    border: 1px solid @card-border;
-    margin: 0 auto;
-    margin-bottom: 1rem;
-    background: white;
-    box-shadow: 5px 5px 5px #f0f0f0;
+    .card {
+
+      &.sliding-right {
+        //transition: margin-left 5s ease-in-out;
+        animation-duration: .5s;
+        animation-name: slide-right;
+      }
+
+      &.sliding-left {
+        animation-duration: .5s;
+        animation-name: slide-left;
+      }
+
+      .card-top { // Just a decoration at the top of a card
+        width: 100%;
+        height: 4rem;
+        background: #39399a;
+        border-bottom: 1px solid @card-border;
+      }
+
+      .card-content {
+        height: ~"calc(100% - 4rem - 2rem)"; // .card-top and .frontHint
+        display: flex;
+        justify-content: center;
+
+        .card-content-wrapper {
+
+          font-size: larger;
+          align-self: center;
+          text-align: center;
+          margin: 0 5rem;
+
+          .main-card-content {
+            font-size: x-large;
+            font-weight: bold;
+          }
+          .context-1 {
+            margin-top: 1rem;
+          }
+          .context-2 {
+            margin-top: 1rem;
+            color: @less-important-text-color;
+          }
+        }
+      }
+
+      .frontHint {
+        color: @less-important-text-color;
+        font-style: italic;
+        height: 2rem; // Ugh, getting around bootstrap px-vs-rem issue here.  Should be fixed in Bootstrap 4
+        text-align: right;
+        margin-right: 1rem;
+      }
+
+      height: 300px;
+      border: 1px solid @card-border;
+      margin-bottom: 1rem;
+      background: white;
+      box-shadow: 5px 5px 5px #f0f0f0;
+    }
   }
 }
 

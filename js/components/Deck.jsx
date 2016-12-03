@@ -6,16 +6,15 @@ import { Link } from 'react-router';
 import ProgressBar from 'react-progress-bar-plus';
 import Timer from './Timer';
 
+/**
+ * The deck of flash cards being worked through and its state.
+ */
 class Deck extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = { deck: {}, curCard: 0, cardFlipped: false,
-                correctCount: 0, startTime: null };
-
-        // Manually bind this method to the component instance so "this" is what we expect
-        this.deckCompleted = this.deckCompleted.bind(this);
-        this.advance = this.advance.bind(this);
+                correctCount: 0, startTime: null, animating: false };
     }
 
     componentWillMount() {
@@ -23,34 +22,7 @@ class Deck extends React.Component {
     }
 
     componentDidMount() {
-
         this.fetchDeckInfo(this.props.deckId);
-
-        $(document).on('keydown.deck', (e) => {
-            switch (e.key) {
-                case 'ArrowRight':
-                    this.advance(true);
-                    break;
-                case 'ArrowLeft':
-                    this.advance(false);
-                    break;
-                case 'ArrowDown':
-                    if (!this.state.cardFlipped) {
-                        this.setState({cardFlipped: true});
-                    }
-                    e.stopPropagation();
-                    e.preventDefault();
-                    break;
-                case 'ArrowUp':
-                    if (this.state.cardFlipped) {
-                        this.setState({cardFlipped: false});
-                    }
-                    e.stopPropagation();
-                    e.preventDefault();
-                    break;
-            }
-        });
-
         this.setState({ correctCount: 0, startTime: new Date() });
     }
 
@@ -59,7 +31,8 @@ class Deck extends React.Component {
         const newCorrectCount = knewCard ? this.state.correctCount + 1 : this.state.correctCount;
 
         if (this.state.curCard < this.state.deck.cards.length - 1) {
-            this.setState({ curCard: this.state.curCard + 1, correctCount: newCorrectCount, cardFlipped: false });
+            this.setState({ curCard: this.state.curCard + 1, correctCount: newCorrectCount, cardFlipped: false,
+                    animating: false });
         }
         else {
             this.deckCompleted();
@@ -126,6 +99,13 @@ class Deck extends React.Component {
         e.preventDefault();
     }
 
+    userKnewCard(knew) {
+        if (!this.state.animating) {
+            this.setState({animating: true});
+            this.topCard.setUserKnew(knew);
+        }
+    }
+
     render() {
 
         if (this.state.curCard === -1) {
@@ -160,7 +140,7 @@ class Deck extends React.Component {
                             return (
                                 <div className="deck">
                                     <ProgressBar spinner={false} percent={percent}/>
-                                    <div className="deck-nav left-nav" onClick={() => { this.advance(false); }}>
+                                    <div className="deck-nav left-nav" onClick={() => { this.userKnewCard(false); }}>
                                         <i className="fa fa-chevron-left" aria-hidden="true"></i>
                                     </div>
                                     <div className="deck-card-section">
@@ -177,7 +157,7 @@ class Deck extends React.Component {
                                         })()
                                         }
                                         <Card key={card.front.text} card={card} flipped={this.state.cardFlipped}
-                                                advance={this.advance.bind(this)}
+                                                ref={(instance) => { this.topCard = instance; }} advance={this.advance.bind(this)}
                                                 toggleVisibleSide={this.toggleCardVisibleSide.bind(this)}/>
 
                                         <div>
@@ -185,7 +165,7 @@ class Deck extends React.Component {
                                                     correctCount={this.state.correctCount}/>
                                         </div>
                                     </div>
-                                    <div className="deck-nav right-nav" onClick={() => { this.advance(true); }}>
+                                    <div className="deck-nav right-nav" onClick={() => { this.userKnewCard(true); }}>
                                         <i className="fa fa-chevron-right" aria-hidden="true" ></i>
                                     </div>
                                 </div>
