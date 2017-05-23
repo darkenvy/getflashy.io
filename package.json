@@ -1,12 +1,13 @@
 {
   "name": "getflashy.io",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "license": "MIT",
   "description": "Source code for getflashy.io",
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch",
+    "build": "./node_modules/.bin/webpack",
+    "watch": "./node_modules/.bin/webpack --watch",
+    "prestart": "npm run build",
     "start": "node server.js"
   },
   "engines": {
@@ -35,9 +36,7 @@
     "react-redux": "^4.4.5",
     "redux": "^3.6.0",
     "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.1.0"
-  },
-  "devDependencies": {
+    "redux-thunk": "^2.1.0",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
     "babel-polyfill": "^6.13.0",
