@@ -3,6 +3,7 @@ build
 .idea
 *.iml
 npm-debug.log
+flashy.db
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

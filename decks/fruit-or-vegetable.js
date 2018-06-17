@@ -1,27 +1,26 @@
 module.exports = {
+  name: 'Fruit or Vegetable',
+  icon: {
+    name: 'apple',
+    color: '#ff6060'
+  },
 
-    name: 'Fruit or Vegetable',
-    icon: {
-        name: 'apple',
-        color: '#ff6060'
+  cards: [
+    {
+      front: {
+        text: 'Apple'
+      },
+      back: {
+        text: 'fruit'
+      }
     },
-
-    cards: [
-        {
-            front: {
-                text: 'Apple'
-            },
-            back: {
-                text: 'fruit'
-            }
-        },
-        {
-            front: {
-                text: 'Green Bean'
-            },
-            back: {
-                text: 'veggie'
-            }
-        }
-    ]
+    {
+      front: {
+        text: 'Green Bean'
+      },
+      back: {
+        text: 'veggie'
+      }
+    }
+  ]
 };
