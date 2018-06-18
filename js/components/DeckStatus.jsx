@@ -1,22 +1,18 @@
 import React from 'react';
 
-export class DeckStatus extends React.Component {
+export default class DeckStatus extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+  render() {
+    const date = new Date().toString();
 
-    render() {
-
-        var date = new Date().toString();
-
-        return (
-            <div className="deck-status">
-                {this.props.curCard} / {this.props.cardCount} (<font color="green">{this.props.correctCount}</font>)
-            </div>
-        );
-    }
+    return (
+      <div className="deck-status">
+        {this.props.curCard} / {this.props.cardCount} (<font color="green">{this.props.correctCount}</font>)
+      </div>
+    );
+  }
 }
-
-export default DeckStatus;
