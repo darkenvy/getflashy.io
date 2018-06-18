@@ -1,19 +1,18 @@
-'use strict';
 const express = require('express');
-const app = express();
 const compression = require('compression');
 const fs = require('fs');
 const path = require('path');
-const async = require('async');
 const bodyParser = require('body-parser');
 const Database = require('better-sqlite3');
+// const async = require('async');
+
 const decks = {};
 const deckDir = path.join(__dirname, 'decks');
 const files = fs.readdirSync(deckDir);
+const app = express();
 const db = new Database('flashy.db');
-//const livereload = require('express-livereload');
+// const livereload = require('express-livereload');
 
-prepareDatabase(); // creates tables if needed
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,35 +22,32 @@ function prepareDatabase() {
   /* ================= No database exists ==================== */
   db.prepare(`
     CREATE TABLE IF NOT EXISTS "users" (
-      "id"	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-      "admin"	INTEGER,
-      "name"	TEXT NOT NULL,
-      "password"  TEXT
-    );`
-  ).run();
+      "id" INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+      "admin" INTEGER,
+      "name" TEXT NOT NULL,
+      "password"  TEXT);`)
+    .run();
   db.prepare(`
     CREATE TABLE IF NOT EXISTS "decks" (
-      "id"	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-      "name"	TEXT NOT NULL
-    );`
-  ).run();
+      "id" INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+      "name" TEXT NOT NULL);`)
+    .run();
   db.prepare(`
     CREATE TABLE IF NOT EXISTS "scores" (
-      "id"	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-      "score"	INTEGER,
-      "time"	INTEGER,
-      "user_id"	INTEGER NOT NULL,
-      "deck_id"	INTEGER NOT NULL,
+      "id" INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+      "score" INTEGER,
+      "time" INTEGER,
+      "user_id" INTEGER NOT NULL,
+      "deck_id" INTEGER NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users(id),
-        FOREIGN KEY (deck_id) REFERENCES decks(id)
-    );`
-  ).run();
+        FOREIGN KEY (deck_id) REFERENCES decks(id));`)
+    .run();
 
   /* ================= No admin account exists ==================== */
   const adminExists = db.prepare("SELECT name FROM users WHERE name = 'admin'").get();
   if (!adminExists) {
     db.prepare('insert into users ("name", "admin") values ("admin", "1")').run();
-    console.log('Alert: No admin account detected. Added admin account')
+    console.log('Alert: No admin account detected. Added admin account');
   }
 
   /* ================= Look for new decks ==================== */
@@ -84,18 +80,20 @@ const createDeckMetadata = decks => {
   return metadata;
 };
 
+prepareDatabase(); // creates tables if needed
+
 // -------------------------- Routes ---------------------------------------- //
 
 // User Routes
 app.get('/api/users', (req, res) => {
   res.type('application/json');
-  let users = db.prepare("SELECT name FROM users").all();
+  let users = db.prepare('SELECT name FROM users').all();
   users = users.map(user => user.name);
   res.json(users);
 });
 
 app.get('/api/user/id/:id', (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const user = db.prepare(`SELECT id, name, admin FROM users WHERE id = '${id}'`).get();
   res.json(user || {});
 });
@@ -107,13 +105,13 @@ app.get('/api/user/scores/:deckId/:id', (req, res) => {
     FROM scores
     WHERE user_id = ${id} AND deck_id = ${deckId}
     ORDER by date("time")
-    DESC limit 25`
-  ).all();
+    DESC limit 25`)
+    .all();
   res.json(user || []);
 });
 
 app.get('/api/user/:name', (req, res) => {
-  const name = req.params.name;
+  const { name } = req.params;
   const user = db.prepare(`SELECT id, name, admin FROM users WHERE name = '${name}'`).get();
   res.json(user || {});
 });
@@ -121,25 +119,24 @@ app.get('/api/user/:name', (req, res) => {
 // Score Routes
 app.post('/api/score/', (req, res) => {
   console.log('adding new score to db', req.body);
-  const time = Date.now() / 1000 | 0;
+  const time = parseInt(Date.now() / 1000, 10);
   let { score, user_id, deck_id } = req.body;
   score = score || 0;
-  score = Math.random() * 100 | 0;
+  score = parseInt(Math.random() * 100, 10);
 
   try {
     db.prepare(`
       insert into scores
         (time, score, user_id, deck_id)
       values
-        (${time}, ${score}, ${user_id}, ${deck_id})`
-    ).run();
+        (${time}, ${score}, ${user_id}, ${deck_id})`)
+      .run();
     res.status(200);
-    res.send('OK')
+    res.send('OK');
   } catch (e) {
     res.status(500);
     res.send('Error adding score: ' + e);
   }
-  
 });
 
 // Deck Routes
@@ -151,7 +148,7 @@ app.get('/api/decks', (req, res) => {
 app.get('/api/decks/:deckId', (req, res) => {
   res.type('application/json');
 
-  let deck = decks[req.params.deckId];
+  const deck = decks[req.params.deckId];
   if (deck) {
     res.json(deck);
   } else {
@@ -167,4 +164,4 @@ app.get('/*', (req, res) => {
 });
 
 app.listen(process.env.PORT || 8080);
-//livereload(app);
+// livereload(app);

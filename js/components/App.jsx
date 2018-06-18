@@ -2,13 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import AppNavbar from './Navbar';
 import { fetchDeckMetadata } from '../actions';
-import { browserHistory } from 'react-router';
-import { compose } from 'redux';
+// import { browserHistory } from 'react-router';
+// import { compose } from 'redux';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       state: 'select-deck',
       deck: '',
@@ -21,7 +20,7 @@ class App extends React.Component {
 
   render() {
     // We use URL param instead of this.props.currentDeckId so bookmarking works
-    var deckId = this.props.params.deck;
+    const { deckId } = this.props.params;
 
     return (
       <div>
@@ -35,7 +34,10 @@ class App extends React.Component {
 export function mapDispatchToProps(dispatch) {
   return {
     fetchDeckMetadata: () => fetchDeckMetadata(dispatch),
-  }
+  };
 }
 
-export default connect(undefined, mapDispatchToProps)(App);
+export default connect(
+  undefined,
+  mapDispatchToProps,
+)(App);

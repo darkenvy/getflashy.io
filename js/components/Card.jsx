@@ -1,122 +1,69 @@
-/* global document */
 import React from 'react';
 import PropTypes from 'prop-types';
 import marked from 'marked';
-import $ from 'jquery';
+import log from '../components/Logger';
 
-/**
- * A rendered card (either the current card, or the one beneath it).
- */
 class Card extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       cardFlipped: false,
       visibility: 'visible',
-      dragStartX: -1,
+      answerWasShown: false,
+      // dragStartX: -1,
     };
 
     this.onClick = this.onClick.bind(this);
-    this.onDrag = this.onDrag.bind(this);
-    this.onDrop = this.onDrop.bind(this);
+    this.onKeyPress = this.onKeyPress.bind(this);
+    // this.onDrag = this.onDrag.bind(this);
+    // this.onDrop = this.onDrop.bind(this);
   }
 
-  componentWillMount() {}
-
   componentDidMount() {
-    // Poor man's way of knowing we're not the "top" card
-    // TODO: Detect this scenario better
-    if (this.props.advance) {
-      $(document).on('keyup.deck', e => {
-        if (this.state.animating) {
-          console.log('animating, not honoring key press');
-          return;
-        }
-        console.log('not animating, honoring key press');
-        switch (e.key) {
-          case 'ArrowRight':
-            this.setUserKnew(true);
-            e.stopPropagation();
-            e.preventDefault();
-            break;
-          case 'ArrowLeft':
-            this.setUserKnew(false);
-            e.stopPropagation();
-            e.preventDefault();
-            break;
-          case 'ArrowDown':
-            if (!this.state.cardFlipped) {
-              this.setState({ cardFlipped: true });
-            }
-            e.stopPropagation();
-            e.preventDefault();
-            break;
-          case 'ArrowUp':
-            if (this.state.cardFlipped) {
-              this.setState({ cardFlipped: false });
-            }
-            e.stopPropagation();
-            e.preventDefault();
-            break;
-          default:
-            break;
-        }
-      });
-    }
+    this.cardRef.focus();
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps) this.setState(props => Object.assign({}, props, { cardFlipped: newProps.flipped }));
-    console.log('component will recieve props', this.props, newProps);
+    if (newProps) {
+      this.setState(props => Object.assign({}, props, {
+        answerWasShown: true,
+        cardFlipped: newProps.flipped,
+      }));
+    }
   }
 
-  componentWillUnmount() {
-    console.log(':(:(:(:(:(');
-    $(document).off('keyup.deck');
+  componentDidUpdate() {
+    this.cardRef.focus();
   }
 
   onClick(e) {
-    console.log('clicking', e, this);
+    log.trace('clicking', e, this);
     this.props.toggleVisibleSide(e);
   }
 
-  onDrag(e) {
-    console.log(`Dragging! - ${e.screenX}`);
-    this.setState({ visibility: 'hidden', dragStartX: e.screenX });
-  }
-
-  onDrop(e) {
-    const delta = e.screenX - this.state.dragStartX;
-    console.log(e.screenX, this.state.dragStartX, delta);
-    if (delta > 100) {
-      // Swipe to the right => knew the word
-      this.props.advance(true);
-    } else if (delta < -100) {
-      // Swipe to the left => didn't know the card
-      this.props.advance(false);
+  onKeyPress(e) {
+    log.trace('key down', e.keyCode);
+    switch (e.keyCode) {
+      case 37: // left
+        if (this.state.answerWasShown) this.props.advance(false);
+        break;
+      case 38: // up
+        // TODO: hide card until later
+        break;
+      case 39: // right
+        if (this.state.answerWasShown) this.props.advance(true);
+        break;
+      case 40: // down
+        this.props.toggleVisibleSide(e);
+        break;
+      default:
+        break;
     }
-
-    console.log('Dropped');
-    this.setState({ visibility: 'visible', dragStartX: -1 });
-  }
-
-  setUserKnew(knew) {
-    const animClassName = knew ? 'sliding-right' : 'sliding-left';
-
-    const $card = $('.card.topCard');
-    $card.addClass(animClassName);
-    this.setState({ animating: true });
-    $card.one('animationend', () => {
-      console.log('Animation ended');
-      $card.removeClass(animClassName);
-      this.setState({ animating: false });
-      this.props.advance(knew);
-    });
   }
 
   render() {
     const { card } = this.props;
-    console.log(`flipped? - ${this.state.cardFlipped}`);
+    log.trace(`flipped? - ${this.state.cardFlipped}`);
     const side = this.state.cardFlipped ? card.back : card.front;
 
     const cardStyle = { visibility: this.state.visibility };
@@ -131,16 +78,22 @@ class Card extends React.Component {
 
     let className = 'card';
     if (this.props.advance) {
-      className += ' topCard';
-    } // TODO: Find a better way to determine the "topmost" card
+      className += ' topCard'; // TODO: Find a better way to determine the "topmost" card
+    }
 
     return (
       <div className="card-wrapper">
         <div
           className={className}
           style={cardStyle}
-          // draggable="true"
+          draggable="true"
+          tabIndex={0}
+          role="button"
+          ref={input => {
+            this.cardRef = input;
+          }}
           onClick={this.onClick}
+          onKeyDown={this.onKeyPress}
           // onDrag={this.onDrag}
           // onDragEnd={this.onDrop}
         >

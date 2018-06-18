@@ -1,66 +1,46 @@
 import { browserHistory } from 'react-router';
 import $ from 'jquery';
-
-export const startingDeckMetadataFetch = () => {
-  return {
-    type: 'START_DECK_METADATA_FETCH'
-  };
-};
-
-export const deckMetadataLoaded = deckMetadata => {
-  return {
-    type: 'DECK_METADATA_LOADED',
-    deckMetadata: deckMetadata
-  };
-};
+import log from '../js/components/Logger';
 
 // Action creator function that returns a function (i.e., a thunk).  This fetches the list of decks from the server.
-export const fetchDeckMetadata = (dispatch) => {
+export const fetchDeckMetadata = dispatch => {
   // Notification of the request for decks, for e.g. busy spinner display
-  dispatch(startingDeckMetadataFetch());
+  dispatch({ type: 'START_DECK_METADATA_FETCH' });
 
-  $.ajax({
-    url: '/api/decks',
-    dataType: 'json',
-    success: function(data) {
-      for (var deckId in data) data[deckId].id = deckId;
-      console.log('data === ' + JSON.stringify(data));
-      dispatch(deckMetadataLoaded(data));
-    }.bind(this),
-    error: function(xhr, status, err) {
-      console.error('#GET Error', status, err.toString());
-    }.bind(this)
-  });
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: '/api/decks',
+      dataType: 'json',
+      success: resolve,
+      error: reject,
+    });
+  })
+    .then(data => {
+      for (const deckId in data) data[deckId].id = deckId;
+      log.debug(`datum === ${JSON.stringify(data)}`);
+      dispatch({ type: 'DECK_METADATA_LOADED', deckMetadata: data });
+    })
+    .catch((xhr, status, err) => {
+      log.fatal('#GET Error', status, err.toString());
+    });
 };
 
 export const configureDeck = deckId => {
-  browserHistory.push('/config/' + deckId); // TODO: This is probably very, very bad, but how do we programmatically navigate?
-  return {
-    type: 'CONFIGURE_DECK',
-    deckId: deckId
-  };
+  browserHistory.push(`/config/${deckId}`); // TODO: This is probably very, very bad, but how do we programmatically navigate?
+  return { type: 'CONFIGURE_DECK', deckId };
 };
 
 export const startDeck = (deckId, config) => {
-  browserHistory.push('/decks/' + deckId); // TODO: This is probably very, very bad, but how do we programmatically navigate?
-  return {
-    type: 'START_DECK',
-    deckId: deckId,
-    config: config
-  };
+  browserHistory.push(`/decks/${deckId}`); // TODO: This is probably very, very bad, but how do we programmatically navigate?
+  return { type: 'START_DECK', deckId, config };
 };
 
 export const showResults = deckId => {
-  browserHistory.push('/results/' + deckId); // TODO: This is probably very, very bad, but how do we programmatically navigate?
-  return {
-    type: 'SHOW_RESULTS',
-    deckId: deckId
-  };
+  browserHistory.push(`/results/${deckId}`); // TODO: This is probably very, very bad, but how do we programmatically navigate?
+  return { type: 'SHOW_RESULTS', deckId };
 };
 
 export const goHome = () => {
   browserHistory.push('/'); // TODO: This is probably very, very bad, but how do we programmatically navigate?
-  return {
-    type: 'RETURN_HOME'
-  };
+  return { type: 'RETURN_HOME' };
 };

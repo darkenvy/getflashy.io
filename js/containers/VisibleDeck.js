@@ -1,4 +1,3 @@
-/* global document */
 import React from 'react';
 import PropTypes from 'prop-types';
 import $ from 'jquery';
@@ -9,25 +8,16 @@ import { showResults } from '../actions';
 import DeckStatus from '../components/DeckStatus';
 import Card from '../components/Card';
 import Timer from '../components/Timer';
+import log from '../components/Logger';
 
 class Deck extends React.Component {
-  // success: function (data) {
-  //   console.log('inside success', this)
-  //   console.log(`Successfully loaded deck: ${deckId}`);
-  //   this.configureDeck(data);
-  //   this.setState({ deck: data });
-  // },
-  // error: function (xhr, status, err) {
-  //   this.setState({ deckId: '', curCard: -1 });
-  //   console.error(deckId, status, err.toString());
-  // }.bind(this),
-
   constructor(props) {
     super(props);
     this.state = {
       deck: {},
       curCard: 0,
       cardFlipped: false,
+      answerWasShown: false,
       correctCount: 0,
       animating: false,
       // correctCount: 0, // unused??
@@ -38,17 +28,8 @@ class Deck extends React.Component {
     this.toggleCardVisibleSide = this.toggleCardVisibleSide.bind(this);
   }
 
-  componentWillMount() {
-    // this.fetchDeckInfo = _.debounce(this.fetchDeckInfo, 500);
-  }
-
   componentDidMount() {
     this.fetchDeckInfo(this.props.deckId);
-  }
-
-  componentWillUnmount() {
-    console.log('Removing key handler...');
-    $(document).off('keydown.deck');
   }
 
   fetchDeckInfo(deckId) {
@@ -60,18 +41,31 @@ class Deck extends React.Component {
         success: resolve,
         error: reject,
       });
-    }).then(data => {
-      console.log(`Successfully loaded deck: ${deckId}`);
-      this.configureDeck(data);
-      this.setState({ deck: data });
-    }).catch((xhr, status, err) => {
-      this.setState({ /* deckId: '', */ curCard: -1 });
-      console.error(deckId, status, err.toString());
-    });
+    })
+      .then(data => {
+        log.debug(`Successfully loaded deck: ${deckId}`);
+        this.configureDeck(data);
+        this.setState({ deck: data });
+      })
+      .catch((xhr, status, err) => {
+        this.setState({ /* deckId: '', */ curCard: -1 });
+        log.fatal(deckId, xhr, status, err);
+      });
   }
 
   configureDeck(deck) {
-    // TODO: fix
+    // const shuffle = arr => {
+    //   const result = arr;
+    //   let j, x, i; // eslint-disable-line
+    //   for (i = result.length - 1; i > 0; i--) {
+    //     j = Math.floor(Math.random() * (i + 1));
+    //     x = result[i];
+    //     result[i] = result[j];
+    //     result[j] = x;
+    //   }
+    //   return result;
+    // };
+
     if (this.props.config.randomize) {
       deck.cards = _.shuffle(deck.cards); // eslint-disable-line no-param-reassign
     }
@@ -80,7 +74,9 @@ class Deck extends React.Component {
   }
 
   advance(knewCard) {
-    console.log('advancing');
+    if (!this.state.answerWasShown) return;
+    
+    log.trace('advancing');
     const newCorrectCount = knewCard ? this.state.correctCount + 1 : this.state.correctCount;
 
     if (this.state.curCard < this.state.deck.cards.length - 1) {
@@ -100,17 +96,13 @@ class Deck extends React.Component {
   }
 
   toggleCardVisibleSide(e) {
-    console.log('toggleCardVisibleSide', this.state);
-    this.setState(state => Object.assign({}, state, { cardFlipped: !this.state.cardFlipped }));
+    log.trace('toggleCardVisibleSide', this.state);
+    this.setState(state => Object.assign({}, state, {
+      answerWasShown: true,
+      cardFlipped: !this.state.cardFlipped,
+    }));
     e.stopPropagation();
     e.preventDefault();
-  }
-
-  userKnewCard(knew) {
-    if (!this.state.animating) {
-      this.setState({ animating: true });
-      this.topCard.setUserKnew(knew);
-    }
   }
 
   render() {
@@ -119,7 +111,9 @@ class Deck extends React.Component {
         <div className="container">
           No such deck!
           <p>
-            <Link to="/" href="#back" >Back to deck list</Link>
+            <Link to="/" href="#back">
+              Back to deck list
+            </Link>
           </p>
         </div>
       );
@@ -148,10 +142,7 @@ class Deck extends React.Component {
             return (
               <div className="deck">
                 <ProgressBar spinner={false} percent={percent} />
-                <div
-                  className="deck-nav left-nav"
-                  onClick={() => this.userKnewCard(false)}
-                >
+                <div className="deck-nav left-nav" onClick={() => this.advance(false)}>
                   <i className="fa fa-chevron-left" aria-hidden="true" />
                 </div>
                 <div className="deck-card-section">
@@ -170,9 +161,6 @@ class Deck extends React.Component {
                     key={card.front.text}
                     card={card}
                     flipped={this.state.cardFlipped}
-                    ref={(instance) => {
-                      this.topCard = instance;
-                    }}
                     advance={this.advance}
                     toggleVisibleSide={this.toggleCardVisibleSide}
                   />
@@ -185,19 +173,14 @@ class Deck extends React.Component {
                     />
                   </div>
                 </div>
-                <div
-                  className="deck-nav right-nav"
-                  onClick={() => this.userKnewCard(true)}
-                >
+                <div className="deck-nav right-nav" onClick={() => this.advance(true)}>
                   <i className="fa fa-chevron-right" aria-hidden="true" />
                 </div>
               </div>
             );
           }
 
-          return (
-            <div className="container">Loading...</div>
-          );
+          return <div className="container">Loading...</div>;
         })()}
       </div>
     );
@@ -216,9 +199,12 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onDeckCompleted: (deckId) => {
+  onDeckCompleted: deckId => {
     dispatch(showResults(deckId));
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Deck);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Deck);
